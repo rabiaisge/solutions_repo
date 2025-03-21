@@ -234,6 +234,78 @@
 <div class="arithmatex">\[R \propto \frac{1}{g}\]</div>
 <p>A higher gravitational acceleration reduces the range, which explains why projectiles on the Moon (where <span class="arithmatex">\(g\)</span> is lower) travel much farther than on Earth.</p>
 <hr/>
+<h1 id="3-practical-applications"><strong>3. Practical Applications</strong></h1>
+<h2 id="31-introduction"><strong>3.1 Introduction</strong></h2>
+<p>In this section, we explore real-world applications of projectile motion, considering various factors such as uneven terrain and air resistance. These cases require advanced mathematical models beyond the idealized equations of motion.</p>
+<h2 id="32-projectile-motion-on-uneven-terrain"><strong>3.2 Projectile Motion on Uneven Terrain</strong></h2>
+<p>When a projectile is launched over an uneven surface, its trajectory is influenced by the varying height of the ground. The general equations of motion in the presence of gravity are given by:</p>
+<p>$ x=v_0\cos(\theta)t $</p>
+<p>$ y=v_0\sin(\theta)t-\frac{1}{2}gt^2 $</p>
+<p>However, when the ground is not flat but follows a function <span class="arithmatex">\(h(x)\)</span>, we must solve for the intersection:</p>
+<p>$ v_0\sin(\theta)t-\frac{1}{2}gt^2=h(v_0\cos(\theta)t) $</p>
+<p>This requires numerical or analytical techniques depending on the complexity of <span class="arithmatex">\(h(x)\)</span>.</p>
+<h2 id="33-air-resistance-in-projectile-motion"><strong>3.3 Air Resistance in Projectile Motion</strong></h2>
+<p>In realistic scenarios, air resistance significantly affects the projectile's motion. The drag force <span class="arithmatex">\(F_d\)</span> is modeled as:</p>
+<div class="arithmatex">\[ F_d=\frac{1}{2}C_d\rho A v^2 \]</div>
+<p>where:
+- <span class="arithmatex">\(C_d\)</span> is the drag coefficient,
+- <span class="arithmatex">\(\rho\)</span> is the air density,
+- <span class="arithmatex">\(A\)</span> is the cross-sectional area,
+- <span class="arithmatex">\(v\)</span> is the velocity of the projectile.</p>
+<p>The motion equations with drag become:</p>
+<div class="arithmatex">\[ m\frac{dv_x}{dt}=-\frac{1}{2}C_d\rho A v v_x \]</div>
+<div class="arithmatex">\[ m\frac{dv_y}{dt}=-mg-\frac{1}{2}C_d\rho A v v_y \]</div>
+<p>These equations are coupled and typically require numerical integration techniques such as the Runge-Kutta method.</p>
+<h2 id="34-computational-approaches"><strong>3.4 Computational Approaches</strong></h2>
+<p>To analyze projectile motion with air resistance or uneven terrain, computational methods are often used. The numerical solution can be obtained using Python or MATLAB, employing:</p>
+<ul>
+<li>Euler’s method</li>
+<li>Runge-Kutta methods</li>
+<li>Finite difference approaches</li>
+</ul>
+<p>These allow us to approximate the trajectory efficiently.</p>
+<h2 id="35-conclusion"><strong>3.5 Conclusion</strong></h2>
+<p>Practical projectile motion problems require considering additional forces and irregular surfaces. Understanding these factors is crucial in fields like aerospace engineering, ballistics, and sports science. The combination of analytical and computational approaches provides deeper insights into real-world projectile dynamics.</p>
+<h2 id="4-python-plot"><strong>4. python/ plot</strong></h2>
+<p><img alt="alt text" src="image.png"/></p>
+<pre><code class="language-python">
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def projectile_range(v0, angle, g=9.81):
+    """
+    Compute the range of a projectile given initial velocity and launch angle.
+    :param v0: Initial velocity (m/s)
+    :param angle: Launch angle (degrees)
+    :param g: Acceleration due to gravity (m/s^2), default is Earth gravity
+    :return: Range of the projectile (m)
+    """
+    theta = np.radians(angle)
+    return (v0**2 * np.sin(2 * theta)) / g
+
+def plot_range(v0, g=9.81):
+    """ Plot range as a function of launch angle. """
+    angles = np.linspace(0, 90, num=100)  # Angles from 0 to 90 degrees
+    ranges = [projectile_range(v0, angle, g) for angle in angles]
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(angles, ranges, label=f'Initial Velocity = {v0} m/s')
+    plt.xlabel('Launch Angle (degrees)')
+    plt.ylabel('Range (m)')
+    plt.title('Projectile Range vs. Launch Angle')
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+# Parameters
+v0 = 20  # Initial velocity in m/s
+
+# Run simulation
+
+plot_range(v0)
+
+</code></pre>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
