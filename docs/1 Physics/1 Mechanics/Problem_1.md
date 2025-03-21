@@ -126,13 +126,13 @@ In this section, we explore real-world applications of projectile motion, consid
 
 When a projectile is launched over an uneven surface, its trajectory is influenced by the varying height of the ground. The general equations of motion in the presence of gravity are given by:
 
-$ x=v_0\cos(\theta)t $
+$$ x=v_0\cos(\theta)t $$
 
-$ y=v_0\sin(\theta)t-\frac{1}{2}gt^2 $
+$$ y=v_0\sin(\theta)t-\frac{1}{2}gt^2 $$
 
 However, when the ground is not flat but follows a function $h(x)$, we must solve for the intersection:
 
-$ v_0\sin(\theta)t-\frac{1}{2}gt^2=h(v_0\cos(\theta)t) $
+$$ v_0\sin(\theta)t-\frac{1}{2}gt^2=h(v_0\cos(\theta)t) $$
 
 This requires numerical or analytical techniques depending on the complexity of $h(x)$.
 
