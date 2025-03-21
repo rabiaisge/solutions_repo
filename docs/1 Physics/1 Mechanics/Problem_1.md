@@ -173,7 +173,7 @@ Practical projectile motion problems require considering additional forces and i
 ##  **4. python/ plot**
 
 
-![alt text](image.png)
+![**alt text**](image-1.png)
 
 ```python
 
@@ -217,3 +217,6 @@ plot_range(v0)
 
 
 
+
+
+[def]: image.png
