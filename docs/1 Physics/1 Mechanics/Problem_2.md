@@ -76,3 +76,4 @@ To explore the system numerically:
 - Extension to more complex models (e.g., nonlinear damping or stochastic forcing).
 
 This study combines theoretical analysis and computational modeling to uncover the rich and complex behavior of forced damped pendulums, demonstrating their relevance across physics and engineering disciplines.
+.
