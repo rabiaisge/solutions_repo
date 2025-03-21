@@ -1,67 +1,118 @@
 # Problem 1
-# Theoretical Foundation
 
-## Deriving the Equations of Motion
+---
+# Investigating the Range as a Function of the Angle of Projection
 
-Projectile motion is governed by Newton's Second Law:
+## 1. Theoretical Foundation
 
-$\mathbf{F}=m\mathbf{a}$
+### 1.1 Governing Equations of Motion
 
-For a projectile under the influence of gravity alone (neglecting air resistance), the only force acting is gravitational force:
+Projectile motion is governed by Newton's Second Law of Motion, which states:
 
-$F_y=-mg$
+$$\mathbf{F}=m\mathbf{a}$$
 
-Thus, the equations of motion can be written as:
+For a projectile launched with an initial velocity $v_0$ at an angle $\theta$, we decompose the motion into horizontal and vertical components:
 
-$m\frac{d^2x}{dt^2}=0 \quad \Rightarrow \quad \frac{d^2x}{dt^2}=0$
+#### Horizontal Motion
 
-$m\frac{d^2y}{dt^2}=-mg \quad \Rightarrow \quad \frac{d^2y}{dt^2}=-g$
+$$x(t)=v_0\cos\theta\cdot t$$
 
-### Solving for Position Functions
+Since there is no horizontal acceleration (assuming no air resistance), the horizontal velocity remains constant:
 
-By integrating the acceleration equations:
+$$v_x=v_0\cos\theta$$
 
-1. **Horizontal Motion:**
-   $\frac{dx}{dt}=v_0\cos\theta$
-   $x(t)=v_0\cos\theta\cdot t$
+#### Vertical Motion
 
-2. **Vertical Motion:**
-   $\frac{dy}{dt}=v_0\sin\theta-g t$
-   $y(t)=v_0\sin\theta\cdot t-\frac{1}{2}g t^2$
+The vertical motion is influenced by gravity $g$, and follows the kinematic equations:
 
-## Range of the Projectile
+$$y(t)=v_0\sin\theta\cdot t-\frac{1}{2}gt^2$$
 
-The range $R$ is the horizontal distance when the projectile lands ($y=0$):
+The vertical velocity is given by:
 
-Setting $y(t)=0$:
+$$v_y=v_0\sin\theta-gt$$
 
-$0=v_0\sin\theta\cdot t-\frac{1}{2}g t^2$
+At the peak of the trajectory, the vertical velocity becomes zero:
 
-Solving for time $t$:
+$$0=v_0\sin\theta-gt_{max}$$
 
-$t=\frac{2 v_0\sin\theta}{g}$
+Solving for $t_{max}$:
 
-Substituting this into $x(t)$:
+$$t_{max}=\frac{v_0\sin\theta}{g}$$
 
-$R=v_0\cos\theta\cdot\frac{2 v_0\sin\theta}{g}$
+The total time of flight is twice this value:
 
-Using the identity $2\sin\theta\cos\theta=\sin 2\theta$, we get:
+$$T=\frac{2v_0\sin\theta}{g}$$
 
-$R=\frac{v_0^2\sin 2\theta}{g}$
+### 1.2 Derivation of the Range Equation
 
-## Effect of Initial Conditions
+The range $R$ is the horizontal distance traveled when $y=0$. Using the horizontal motion equation:
 
-1. **Initial Velocity ($v_0$)**
-   - The range increases quadratically with $v_0$:
-   $R\propto v_0^2$
+$$R=v_xT$$
 
-2. **Launch Angle ($\theta$)**
-   - The range is maximized when $\theta=45^\circ$, since $\sin 2\theta$ reaches its peak at $90^\circ$.
+Substituting $v_x=v_0\cos\theta$ and $T=\frac{2v_0\sin\theta}{g}$:
 
-3. **Gravitational Acceleration ($g$)**
-   - The range decreases with increasing $g$:
-   $R\propto\frac{1}{g}$
+$$R=v_0\cos\theta\cdot\frac{2v_0\sin\theta}{g}$$
 
-This theoretical framework lays the foundation for further numerical simulations and experimental analysis.
+Using the trigonometric identity $2\sin\theta\cos\theta=\sin2\theta$, we obtain:
 
+$$R=\frac{v_0^2\sin2\theta}{g}$$
+
+### 1.3 Influence of Initial Conditions
+
+- **Initial Velocity ($v_0$)**: Increasing $v_0$ increases $R$ quadratically.
+- **Angle of Projection ($\theta$)**: Maximum range occurs at $\theta=45^\circ$.
+- **Gravitational Acceleration ($g$)**: A higher $g$ decreases the range.
+- **Launch Height ($h$)**: If launched from a height $h$, the total flight time increases, affecting $R$.
+
+#### Modified Range Equation for Nonzero Initial Height
+
+If the projectile is launched from height $h$, the quadratic equation for time of flight is:
+
+$$y=v_0\sin\theta\cdot t-\frac{1}{2}gt^2+h=0$$
+
+Solving for $t$, we get:
+
+$$t=\frac{v_0\sin\theta+\sqrt{(v_0\sin\theta)^2+2gh}}{g}$$
+
+The range then becomes:
+
+$$R=v_0\cos\theta\cdot\left(\frac{v_0\sin\theta+\sqrt{(v_0\sin\theta)^2+2gh}}{g}\right)$$
+
+This equation accounts for different launch heights, making it more general.
+
+---
+
+## 2. Analysis of the Range
+
+### 2.1 Dependence on the Angle of Projection
+
+The horizontal range $R$ depends on the angle of projection $\theta$ as:
+
+$$R=\frac{v_0^2\sin2\theta}{g}$$
+
+This function is symmetric about $45^\circ$, meaning that complementary angles ($\theta$ and $90^\circ - \theta$) result in the same range. The maximum range occurs when:
+
+$$\theta=45^\circ$$
+
+At this angle, the sine function reaches its maximum value of 1, giving:
+
+$$R_{max}=\frac{v_0^2}{g}$$
+
+### 2.2 Influence of Initial Velocity
+
+From the range equation:
+
+$$R \propto v_0^2$$
+
+This quadratic relationship implies that doubling the initial velocity results in a fourfold increase in range.
+
+### 2.3 Influence of Gravitational Acceleration
+
+Since:
+
+$$R \propto \frac{1}{g}$$
+
+A higher gravitational acceleration reduces the range, which explains why projectiles on the Moon (where $g$ is lower) travel much farther than on Earth.
+
+---
 
