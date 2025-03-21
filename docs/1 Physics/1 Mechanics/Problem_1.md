@@ -116,3 +116,104 @@ A higher gravitational acceleration reduces the range, which explains why projec
 
 ---
 
+# **3. Practical Applications**
+
+## **3.1 Introduction**
+
+In this section, we explore real-world applications of projectile motion, considering various factors such as uneven terrain and air resistance. These cases require advanced mathematical models beyond the idealized equations of motion.
+
+## **3.2 Projectile Motion on Uneven Terrain**
+
+When a projectile is launched over an uneven surface, its trajectory is influenced by the varying height of the ground. The general equations of motion in the presence of gravity are given by:
+
+$ x=v_0\cos(\theta)t $
+
+$ y=v_0\sin(\theta)t-\frac{1}{2}gt^2 $
+
+However, when the ground is not flat but follows a function $h(x)$, we must solve for the intersection:
+
+$ v_0\sin(\theta)t-\frac{1}{2}gt^2=h(v_0\cos(\theta)t) $
+
+This requires numerical or analytical techniques depending on the complexity of $h(x)$.
+
+## **3.3 Air Resistance in Projectile Motion**
+
+In realistic scenarios, air resistance significantly affects the projectile's motion. The drag force $F_d$ is modeled as:
+
+$$ F_d=\frac{1}{2}C_d\rho A v^2 $$
+
+where:
+- $C_d$ is the drag coefficient,
+- $\rho$ is the air density,
+- $A$ is the cross-sectional area,
+- $v$ is the velocity of the projectile.
+
+The motion equations with drag become:
+
+$$ m\frac{dv_x}{dt}=-\frac{1}{2}C_d\rho A v v_x $$
+
+$$ m\frac{dv_y}{dt}=-mg-\frac{1}{2}C_d\rho A v v_y $$
+
+These equations are coupled and typically require numerical integration techniques such as the Runge-Kutta method.
+
+## **3.4 Computational Approaches**
+
+To analyze projectile motion with air resistance or uneven terrain, computational methods are often used. The numerical solution can be obtained using Python or MATLAB, employing:
+
+- Euler’s method
+- Runge-Kutta methods
+- Finite difference approaches
+
+These allow us to approximate the trajectory efficiently.
+
+## **3.5 Conclusion**
+
+Practical projectile motion problems require considering additional forces and irregular surfaces. Understanding these factors is crucial in fields like aerospace engineering, ballistics, and sports science. The combination of analytical and computational approaches provides deeper insights into real-world projectile dynamics.
+
+##  **4. python/ plot**
+
+
+![alt text](image.png)
+
+```python
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def projectile_range(v0, angle, g=9.81):
+    """
+    Compute the range of a projectile given initial velocity and launch angle.
+    :param v0: Initial velocity (m/s)
+    :param angle: Launch angle (degrees)
+    :param g: Acceleration due to gravity (m/s^2), default is Earth gravity
+    :return: Range of the projectile (m)
+    """
+    theta = np.radians(angle)
+    return (v0**2 * np.sin(2 * theta)) / g
+
+def plot_range(v0, g=9.81):
+    """ Plot range as a function of launch angle. """
+    angles = np.linspace(0, 90, num=100)  # Angles from 0 to 90 degrees
+    ranges = [projectile_range(v0, angle, g) for angle in angles]
+    
+    plt.figure(figsize=(10, 5))
+    plt.plot(angles, ranges, label=f'Initial Velocity = {v0} m/s')
+    plt.xlabel('Launch Angle (degrees)')
+    plt.ylabel('Range (m)')
+    plt.title('Projectile Range vs. Launch Angle')
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+# Parameters
+v0 = 20  # Initial velocity in m/s
+
+# Run simulation
+
+plot_range(v0)
+
+```
+
+
+
