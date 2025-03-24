@@ -262,11 +262,11 @@ These equations demonstrate how the forced damped pendulum model applies to dive
 ### 4. python/plot
 
 
-![alt text](image-2.png)
+![**alt text**](image-2.png)
 
-![alt text](image-3.png)
+![**alt text**](image-3.png)
 
-![alt text](image-4.png)
+![**alt text**](image-4.png)
 
 
 ```python
