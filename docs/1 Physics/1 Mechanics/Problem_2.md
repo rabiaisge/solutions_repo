@@ -328,5 +328,3 @@ plt.grid()
 plt.show()
 
  ```
-
-link{colab}:https://colab.research.google.com/drive/1WSAIR1LMCMNbd5M-bufs92H_jsr8xx2H?usp=sharing
