@@ -264,9 +264,7 @@ These equations demonstrate how the forced damped pendulum model applies to dive
 
 ![alt text](image-2.png)
 
-
 ![alt text](image-3.png)
-
 
 ![alt text](image-4.png)
 
@@ -326,5 +324,6 @@ plt.ylabel('Angular Velocity')
 plt.title('Poinca Section')
 plt.grid()
 plt.show()
+
 
  ```
