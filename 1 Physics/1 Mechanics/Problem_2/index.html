@@ -173,69 +173,232 @@
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
 <h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum">Investigating the Dynamics of a Forced Damped Pendulum</h1>
-<h2 id="theoretical-foundation">Theoretical Foundation</h2>
-<p>The motion of a forced damped pendulum is governed by the following differential equation:</p>
-<div class="arithmatex">\[\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \omega_0^2 \sin\theta = A\cos(\omega t)\]</div>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
+<h3 id="11-governing-equation">1.1 Governing Equation</h3>
+<p>The motion of a forced damped pendulum is described by the second-order nonlinear differential equation:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + \gamma \frac{d\theta}{dt} + \omega_0^2 \sin\theta = F_0 \cos(\omega t),
+\]</div>
 <p>where:
 - <span class="arithmatex">\(\theta\)</span> is the angular displacement,
-- <span class="arithmatex">\(b\)</span> is the damping coefficient,
-- <span class="arithmatex">\(\omega_0\)</span> is the natural frequency of the pendulum,
-- <span class="arithmatex">\(A\)</span> is the amplitude of the external driving force,
+- <span class="arithmatex">\(\gamma\)</span> is the damping coefficient,
+- <span class="arithmatex">\(\omega_0 = \sqrt{g/L}\)</span> is the natural frequency of the pendulum,
+- <span class="arithmatex">\(F_0\)</span> is the amplitude of the external periodic forcing,
+- <span class="arithmatex">\(\omega\)</span> is the driving frequency,
+- <span class="arithmatex">\(g\)</span> is the acceleration due to gravity,
+- <span class="arithmatex">\(L\)</span> is the length of the pendulum.</p>
+<h3 id="12-approximate-solutions-for-small-angle-oscillations">1.2 Approximate Solutions for Small-Angle Oscillations</h3>
+<p>For small angles (<span class="arithmatex">\(\theta \approx 0\)</span>), we use the small-angle approximation:</p>
+<div class="arithmatex">\[
+\sin\theta \approx \theta.
+\]</div>
+<p>This simplifies the governing equation to a linear form:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + \gamma \frac{d\theta}{dt} + \omega_0^2 \theta = F_0 \cos(\omega t).
+\]</div>
+<p>This is a damped, driven harmonic oscillator equation, which can be solved using standard techniques.</p>
+<h4 id="homogeneous-solution-natural-response">Homogeneous Solution (Natural Response)</h4>
+<p>The homogeneous equation:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + \gamma \frac{d\theta}{dt} + \omega_0^2 \theta = 0
+\]</div>
+<p>has a general solution of the form:</p>
+<div class="arithmatex">\[
+\theta_h (t) = e^{-\frac{\gamma}{2}t} \left( C_1 \cos(\Omega t) + C_2 \sin(\Omega t) \right),
+\]</div>
+<p>where:</p>
+<div class="arithmatex">\[
+\Omega = \sqrt{\omega_0^2 - \frac{\gamma^2}{4}}
+\]</div>
+<p>is the damped frequency of oscillation.</p>
+<h4 id="particular-solution-steady-state-response">Particular Solution (Steady-State Response)</h4>
+<p>For the forcing term <span class="arithmatex">\(F_0 \cos(\omega t)\)</span>, we assume a solution of the form:</p>
+<div class="arithmatex">\[
+\theta_p (t) = A \cos(\omega t - \delta).
+\]</div>
+<p>Substituting into the equation and solving for <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(\delta\)</span>, we obtain:</p>
+<div class="arithmatex">\[
+A = \frac{F_0}{\sqrt{(\omega_0^2 - \omega^2)^2 + \gamma^2 \omega^2}},
+\]</div>
+<div class="arithmatex">\[
+\tan\delta = \frac{\gamma \omega}{\omega_0^2 - \omega^2}.
+\]</div>
+<p>Thus, the total solution is:</p>
+<div class="arithmatex">\[
+\theta (t) = e^{-\frac{\gamma}{2}t} \left( C_1 \cos(\Omega t) + C_2 \sin(\Omega t) \right) + A \cos(\omega t - \delta).
+\]</div>
+<h3 id="13-resonance-conditions-and-energy-implications">1.3 Resonance Conditions and Energy Implications</h3>
+<p>Resonance occurs when the driving frequency <span class="arithmatex">\(\omega\)</span> is close to the natural frequency <span class="arithmatex">\(\omega_0\)</span>. In the absence of damping (<span class="arithmatex">\(\gamma = 0\)</span>), the amplitude becomes:</p>
+<div class="arithmatex">\[
+A = \frac{F_0}{|\omega_0^2 - \omega^2|}.
+\]</div>
+<p>For <span class="arithmatex">\(\omega \approx \omega_0\)</span>, the amplitude becomes very large, indicating resonance.</p>
+<p>In the presence of damping, the peak amplitude occurs at a slightly shifted frequency given by:</p>
+<div class="arithmatex">\[
+\omega_r = \sqrt{\omega_0^2 - \frac{\gamma^2}{2}}.
+\]</div>
+<p>The energy of the system is given by:</p>
+<div class="arithmatex">\[
+E = \frac{1}{2} I \dot{\theta}^2 + mgL(1 - \cos\theta),
+\]</div>
+<p>where <span class="arithmatex">\(I = mL^2\)</span> is the moment of inertia.</p>
+<p>In steady-state oscillations, energy is continuously supplied by the external force to compensate for the energy lost due to damping, resulting in a balance where the average energy remains constant.</p>
+<hr/>
+<p>This section provides the theoretical groundwork necessary to analyze the forced damped pendulum. Further analysis will involve numerical simulations and visualization techniques to explore the full dynamical behavior, including chaos and bifurcations.</p>
+<h1 id="analysis-of-dynamics">Analysis of Dynamics</h1>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>In this section, we analyze the effects of key parameters on the motion of a dynamical system. We focus on the damping coefficient <span class="arithmatex">\(\gamma\)</span>, driving amplitude <span class="arithmatex">\(F_0\)</span>, and driving frequency <span class="arithmatex">\(\omega\)</span>. The study involves examining regular and chaotic motion and interpreting their physical significance.</p>
+<h2 id="2-governing-equations">2. Governing Equations</h2>
+<p>The general equation of motion for a driven, damped system is given by:</p>
+<div class="arithmatex">\[m\ddot{x} + \gamma \dot{x} + kx = F_0 \cos(\omega t)\]</div>
+<p>where:
+- <span class="arithmatex">\(m\)</span> is the mass,
+- <span class="arithmatex">\(\gamma\)</span> is the damping coefficient,
+- <span class="arithmatex">\(k\)</span> is the stiffness of the system,
+- <span class="arithmatex">\(F_0\)</span> is the driving amplitude,
 - <span class="arithmatex">\(\omega\)</span> is the driving frequency.</p>
-<h3 id="approximate-solutions-for-small-angle-oscillations">Approximate Solutions for Small-Angle Oscillations</h3>
-<p>For small angles (<span class="arithmatex">\(\theta \approx \sin\theta\)</span>), the equation simplifies to:</p>
-<div class="arithmatex">\[\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \omega_0^2\theta = A\cos(\omega t)\]</div>
-<p>This is a linear differential equation, which can be solved using standard methods. The general solution consists of:</p>
+<p>Rewriting in dimensionless form using <span class="arithmatex">\(\tau = \omega_0 t\)</span> (where <span class="arithmatex">\(\omega_0 = \sqrt{k/m}\)</span> is the natural frequency):</p>
+<div class="arithmatex">\[\ddot{X} + 2\zeta \dot{X} + X = A \cos(\Omega \tau)\]</div>
+<p>where:
+- <span class="arithmatex">\(\zeta = \frac{\gamma}{2m\omega_0}\)</span> is the damping ratio,
+- <span class="arithmatex">\(A = \frac{F_0}{m\omega_0^2}\)</span> is the normalized forcing amplitude,
+- <span class="arithmatex">\(\Omega = \frac{\omega}{\omega_0}\)</span> is the normalized driving frequency.</p>
+<h2 id="3-effects-of-parameters">3. Effects of Parameters</h2>
+<h3 id="31-effect-of-damping-coefficient-gamma">3.1 Effect of Damping Coefficient (<span class="arithmatex">\(\gamma\)</span>)</h3>
+<ul>
+<li>When <span class="arithmatex">\(\gamma\)</span> is small (underdamped case, <span class="arithmatex">\(\zeta &lt; 1\)</span>), the system exhibits oscillatory behavior with slow decay.</li>
+<li>When <span class="arithmatex">\(\gamma\)</span> is large (overdamped case, <span class="arithmatex">\(\zeta &gt; 1\)</span>), the motion decays without oscillations.</li>
+<li>The critical damping case (<span class="arithmatex">\(\zeta = 1\)</span>) represents the boundary between these behaviors.</li>
+</ul>
+<p>The quality factor <span class="arithmatex">\(Q\)</span> is related to damping by:</p>
+<div class="arithmatex">\[Q = \frac{1}{2\zeta}\]</div>
+<p>which determines the sharpness of resonance.</p>
+<h3 id="32-effect-of-driving-amplitude-f_0">3.2 Effect of Driving Amplitude (<span class="arithmatex">\(F_0\)</span>)</h3>
+<ul>
+<li>For small <span class="arithmatex">\(F_0\)</span>, the system remains in a regular periodic state.</li>
+<li>As <span class="arithmatex">\(F_0\)</span> increases, the system may exhibit nonlinear effects and enter chaotic regimes.</li>
+<li>The response amplitude <span class="arithmatex">\(X_{max}\)</span> follows:</li>
+</ul>
+<div class="arithmatex">\[X_{max} \propto \frac{F_0}{\sqrt{(k - m\omega^2)^2 + (\gamma \omega)^2}}\]</div>
+<p>which shows resonance at <span class="arithmatex">\(\omega \approx \omega_0\)</span> when damping is small.</p>
+<h3 id="33-effect-of-driving-frequency-omega">3.3 Effect of Driving Frequency (<span class="arithmatex">\(\omega\)</span>)</h3>
+<ul>
+<li>When <span class="arithmatex">\(\omega \approx \omega_0\)</span>, resonance occurs, leading to large oscillations.</li>
+<li>For <span class="arithmatex">\(\omega \gg \omega_0\)</span>, the response amplitude decreases as:</li>
+</ul>
+<div class="arithmatex">\[X \approx \frac{F_0}{m\omega^2}\]</div>
+<p>indicating that high-frequency driving leads to negligible displacement.</p>
+<h2 id="4-regular-vs-chaotic-motion">4. Regular vs. Chaotic Motion</h2>
+<h3 id="41-period-doubling-route-to-chaos">4.1 Period Doubling Route to Chaos</h3>
+<p>As <span class="arithmatex">\(F_0\)</span> or <span class="arithmatex">\(\omega\)</span> is increased, the system undergoes a transition from periodic motion to chaos. The route often follows a period-doubling bifurcation sequence:</p>
+<div class="arithmatex">\[T \to 2T \to 4T \to 8T \to \dots\]</div>
+<p>where <span class="arithmatex">\(T\)</span> is the fundamental period. The Lyapunov exponent <span class="arithmatex">\(\lambda\)</span> determines chaos:</p>
+<div class="arithmatex">\[\lambda = \lim_{t \to \infty} \frac{1}{t} \ln \left| \frac{dx_t}{dx_0} \right|\]</div>
+<p>If <span class="arithmatex">\(\lambda &gt; 0\)</span>, the system is chaotic.</p>
+<h3 id="42-physical-interpretation">4.2 Physical Interpretation</h3>
+<ul>
+<li>Regular motion corresponds to predictable, periodic behavior, often observed at low <span class="arithmatex">\(F_0\)</span>.</li>
+<li>Chaotic motion implies sensitive dependence on initial conditions, leading to an unpredictable long-term trajectory.</li>
+<li>The transition is crucial in applications like pendulum clocks, electrical circuits, and climate modeling.</li>
+</ul>
+<h2 id="5-conclusion">5. Conclusion</h2>
+<p>The study of dynamics highlights the impact of system parameters on motion behavior. Understanding these effects is essential in engineering, physics, and applied mathematics for designing stable and predictable systems.</p>
+<h2 id="3-practical-applications">3. Practical Applications</h2>
+<h3 id="real-world-applications">Real-World Applications</h3>
+<p>The forced damped pendulum model has numerous real-world applications, particularly in systems where oscillatory motion and damping effects play a crucial role. Some key applications include:</p>
 <ol>
-<li>
-<p><strong>Homogeneous solution</strong> (decaying oscillations due to damping):
-   <span class="arithmatex">\(<span class="arithmatex">\(\theta_h(t) = e^{-bt/2} \left(C_1 \cos(\Omega t) + C_2 \sin(\Omega t)\right)\)</span>\)</span>
-   where <span class="arithmatex">\(\Omega = \sqrt{\omega_0^2 - (b/2)^2}\)</span>.</p>
-</li>
-<li>
-<p><strong>Particular solution</strong> (steady-state response to the external forcing):
-   <span class="arithmatex">\(<span class="arithmatex">\(\theta_p(t) = \frac{A}{\sqrt{(\omega_0^2 - \omega^2)^2 + b^2\omega^2}} \cos(\omega t - \phi)\)</span>\)</span>
-   where <span class="arithmatex">\(\phi\)</span> is the phase shift given by:
-   <span class="arithmatex">\(<span class="arithmatex">\(\tan\phi = \frac{b\omega}{\omega_0^2 - \omega^2}\)</span>\)</span></p>
-</li>
+<li><strong>Energy Harvesting</strong></li>
+<li><strong>Suspension Bridges</strong></li>
+<li><strong>Oscillating Circuits</strong></li>
 </ol>
-<h3 id="resonance-conditions">Resonance Conditions</h3>
-<p>Resonance occurs when the driving frequency matches the natural frequency of the system, leading to a maximum steady-state response:</p>
-<div class="arithmatex">\[\omega \approx \omega_0\]</div>
-<p>At resonance, the amplitude of oscillations becomes large, which has significant implications for energy transfer and structural integrity in mechanical systems.</p>
-<h2 id="analysis-of-dynamics">Analysis of Dynamics</h2>
-<ul>
-<li>The damping coefficient <span class="arithmatex">\(b\)</span> controls how quickly the oscillations decay.</li>
-<li>The driving amplitude <span class="arithmatex">\(A\)</span> affects the magnitude of forced oscillations.</li>
-<li>The driving frequency <span class="arithmatex">\(\omega\)</span> determines whether resonance or chaotic behavior occurs.</li>
-</ul>
-<p>As <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(\omega\)</span> are varied, the system transitions from regular periodic motion to complex chaotic dynamics. The transition to chaos can be studied using:
-- <strong>Phase portraits</strong>
-- <strong>Poincar sections</strong>
-- <strong>Bifurcation diagrams</strong></p>
-<h2 id="practical-applications">Practical Applications</h2>
-<p>The forced damped pendulum model is applicable in:
-- <strong>Energy harvesting devices</strong> (e.g., piezoelectric systems converting mechanical oscillations into electrical energy)
-- <strong>Suspension bridges</strong> (to study resonance effects and prevent catastrophic failures)
-- <strong>Oscillating electrical circuits</strong> (analogous to driven RLC circuits)</p>
-<h2 id="implementation">Implementation</h2>
-<p>To explore the system numerically:
-1. Implement a computational model using Python.
-2. Solve the equation using numerical methods (e.g., Runge-Kutta).
-3. Generate plots for different parameter values:
-   - Time series of <span class="arithmatex">\(\theta(t)\)</span>
-   - Phase diagrams (<span class="arithmatex">\(\theta\)</span> vs. <span class="arithmatex">\(d\theta/dt\)</span>)
-   - Poincar sections to identify periodic vs. chaotic motion.
-   - Bifurcation diagrams to analyze changes in stability.</p>
-<h2 id="deliverables">Deliverables</h2>
-<ul>
-<li>A Markdown document with Python scripts and simulations.</li>
-<li>Graphical representations of different dynamical regimes.</li>
-<li>Discussion on resonance, chaos, and energy considerations.</li>
-<li>Extension to more complex models (e.g., nonlinear damping or stochastic forcing).</li>
-</ul>
-<p>This study combines theoretical analysis and computational modeling to uncover the rich and complex behavior of forced damped pendulums, demonstrating their relevance across physics and engineering disciplines.
-.</p>
+<h3 id="31-energy-harvesting">3.1 Energy Harvesting</h3>
+<p>Energy harvesting systems often utilize forced oscillatory motion to convert mechanical energy into electrical energy. A mathematical model of such a system is:</p>
+<div class="arithmatex">\[m\ddot{x} + c\dot{x} + kx = F_0\cos(\omega t)\]</div>
+<p>where:
+- <span class="arithmatex">\(m\)</span> is the mass,
+- <span class="arithmatex">\(c\)</span> is the damping coefficient,
+- <span class="arithmatex">\(k\)</span> is the stiffness constant,
+- <span class="arithmatex">\(F_0\)</span> is the external force amplitude,
+- <span class="arithmatex">\(\omega\)</span> is the forcing frequency.</p>
+<p>The resonance condition occurs when <span class="arithmatex">\(\omega \approx \omega_0\)</span>, where <span class="arithmatex">\(\omega_0 = \sqrt{k/m}\)</span>, leading to maximum energy transfer.</p>
+<h3 id="32-suspension-bridges">3.2 Suspension Bridges</h3>
+<p>Suspension bridges experience oscillations due to wind forces and pedestrian movements. The forced damped pendulum model describes how damping affects the stability of bridges. The governing equation is:</p>
+<div class="arithmatex">\[mL^2\ddot{\theta} + cL^2\dot{\theta} + mgL\sin\theta = F\cos(\omega t)\]</div>
+<p>where:
+- <span class="arithmatex">\(\theta\)</span> is the angular displacement,
+- <span class="arithmatex">\(L\)</span> is the length of the bridge cable,
+- <span class="arithmatex">\(g\)</span> is gravitational acceleration,
+- <span class="arithmatex">\(F\)</span> is the external forcing function.</p>
+<p>For small oscillations, we approximate <span class="arithmatex">\(\sin\theta \approx \theta\)</span>, reducing the equation to a linear damped forced oscillator model.</p>
+<h3 id="33-oscillating-circuits">3.3 Oscillating Circuits</h3>
+<p>RLC circuits exhibit forced damped oscillations where resistance (<span class="arithmatex">\(R\)</span>), inductance (<span class="arithmatex">\(L\)</span>), and capacitance (<span class="arithmatex">\(C\)</span>) determine the system behavior. The differential equation governing an RLC circuit is:</p>
+<div class="arithmatex">\[L\ddot{q} + R\dot{q} + \frac{1}{C}q = V_0\cos(\omega t)\]</div>
+<p>where:
+- <span class="arithmatex">\(q\)</span> is the charge,
+- <span class="arithmatex">\(R\)</span> is the resistance,
+- <span class="arithmatex">\(L\)</span> is the inductance,
+- <span class="arithmatex">\(C\)</span> is the capacitance,
+- <span class="arithmatex">\(V_0\)</span> is the driving voltage.</p>
+<p>The natural frequency is given by:
+<span class="arithmatex">\(<span class="arithmatex">\(\omega_0 = \frac{1}{\sqrt{LC}}\)</span>\)</span></p>
+<p>and the damping ratio is:
+<span class="arithmatex">\(<span class="arithmatex">\(\zeta = \frac{R}{2} \sqrt{\frac{C}{L}}.\)</span>\)</span> </p>
+<p>If <span class="arithmatex">\(\zeta &lt; 1\)</span>, the system is underdamped and oscillatory; if <span class="arithmatex">\(\zeta &gt; 1\)</span>, the system is overdamped.</p>
+<hr/>
+<p>These equations demonstrate how the forced damped pendulum model applies to diverse engineering and physical systems.</p>
+<h3 id="4-pythonplot">4. python/plot</h3>
+<p><img alt="alt text" src="image-2.png"/></p>
+<p><img alt="alt text" src="image-3.png"/></p>
+<p><img alt="alt text" src="image-4.png"/></p>
+<p>```python</p>
+<p>import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp</p>
+<h1 id="define-the-forced-damped-pendulum-equations">Define the forced damped pendulum equations</h1>
+<p>def forced_damped_pendulum(t, y, q, F, omega):
+    theta, omega_dot = y
+    dtheta_dt = omega_dot
+    domega_dt = -np.sin(theta) - q * omega_dot + F * np.cos(omega * t)
+    return [dtheta_dt, domega_dt]</p>
+<h1 id="simulation-parameters">Simulation parameters</h1>
+<p>dt = 0.01
+t_max = 100
+q = 0.5  # damping coefficient
+F = 1.2  # driving force
+omega = 2/3  # driving frequency
+y0 = [0.2, 0.0]  # initial conditions (theta, omega)</p>
+<h1 id="solve-the-ode">Solve the ODE</h1>
+<p>t_eval = np.arange(0, t_max, dt)
+sol = solve_ivp(forced_damped_pendulum, [0, t_max], y0, t_eval=t_eval, args=(q, F, omega))</p>
+<h1 id="plot-time-series">Plot time series</h1>
+<p>plt.figure(figsize=(10, 4))
+plt.plot(sol.t, sol.y[0], label='Theta (angle)')
+plt.xlabel('Time')
+plt.ylabel('Theta')
+plt.legend()
+plt.title('Forced Damped Pendulum Motion')
+plt.grid()
+plt.show()</p>
+<h1 id="phase-diagram">Phase diagram</h1>
+<p>plt.figure(figsize=(6, 6))
+plt.plot(sol.y[0], sol.y[1], lw=0.5)
+plt.xlabel('Theta')
+plt.ylabel('Angular Velocity')
+plt.title('Phase Diagram')
+plt.grid()
+plt.show()</p>
+<h1 id="poincare-section">Poincare Section</h1>
+<p>times = np.arange(0, t_max, 2*np.pi/omega)
+points = solve_ivp(forced_damped_pendulum, [0, t_max], y0, t_eval=times, args=(q, F, omega))
+plt.figure(figsize=(6, 6))
+plt.scatter(points.y[0], points.y[1], s=5)
+plt.xlabel('Theta')
+plt.ylabel('Angular Velocity')
+plt.title('Poincaré Section')
+plt.grid()
+plt.show()</p>
+<p>```
+link{colab}:https://colab.research.google.com/drive/1WSAIR1LMCMNbd5M-bufs92H_jsr8xx2H?usp=sharing</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
