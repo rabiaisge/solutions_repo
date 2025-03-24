@@ -273,6 +273,7 @@ These equations demonstrate how the forced damped pendulum model applies to dive
 
 ```python
 
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
@@ -322,9 +323,10 @@ plt.figure(figsize=(6, 6))
 plt.scatter(points.y[0], points.y[1], s=5)
 plt.xlabel('Theta')
 plt.ylabel('Angular Velocity')
-plt.title('Poincaré Section')
+plt.title('Poinca Section')
 plt.grid()
 plt.show()
 
  ```
+
 link{colab}:https://colab.research.google.com/drive/1WSAIR1LMCMNbd5M-bufs92H_jsr8xx2H?usp=sharing
