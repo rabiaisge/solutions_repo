@@ -175,6 +175,9 @@ Practical projectile motion problems require considering additional forces and i
 
 ![**alt text**](image-1.png)
 
+![alt text](image-5.png)
+
+
 ```python
 
 
@@ -221,3 +224,4 @@ plot_range(v0)
 
 [def]: image.png
 
+link: [colab](https://colab.research.google.com/drive/1ySJA-2pOwEUZO4lzTj7ljVzLLVJOuRuY?usp=sharing)
