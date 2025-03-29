@@ -221,4 +221,3 @@ plot_range(v0)
 
 [def]: image.png
 
-link:colab[](https://colab.research.google.com/drive/13ifjyTWjSf8v_JxPEn7eIGGClNjbyyAl?usp=sharing)
