@@ -347,57 +347,6 @@ E = \frac{1}{2} I \dot{\theta}^2 + mgL(1 - \cos\theta),
 <hr/>
 <p>These equations demonstrate how the forced damped pendulum model applies to diverse engineering and physical systems.</p>
 <h3 id="4-pythonplot">4. python/plot</h3>
-<p><img alt="**alt text**" src="image-2.png"/></p>
-<p><img alt="**alt text**" src="image-3.png"/></p>
-<p><img alt="**alt text**" src="image-4.png"/></p>
-<p>```python</p>
-<p>import numpy as np
-import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp</p>
-<h1 id="define-the-forced-damped-pendulum-equations">Define the forced damped pendulum equations</h1>
-<p>def forced_damped_pendulum(t, y, q, F, omega):
-    theta, omega_dot = y
-    dtheta_dt = omega_dot
-    domega_dt = -np.sin(theta) - q * omega_dot + F * np.cos(omega * t)
-    return [dtheta_dt, domega_dt]</p>
-<h1 id="simulation-parameters">Simulation parameters</h1>
-<p>dt = 0.01
-t_max = 100
-q = 0.5  # damping coefficient
-F = 1.2  # driving force
-omega = 2/3  # driving frequency
-y0 = [0.2, 0.0]  # initial conditions (theta, omega)</p>
-<h1 id="solve-the-ode">Solve the ODE</h1>
-<p>t_eval = np.arange(0, t_max, dt)
-sol = solve_ivp(forced_damped_pendulum, [0, t_max], y0, t_eval=t_eval, args=(q, F, omega))</p>
-<h1 id="plot-time-series">Plot time series</h1>
-<p>plt.figure(figsize=(10, 4))
-plt.plot(sol.t, sol.y[0], label='Theta (angle)')
-plt.xlabel('Time')
-plt.ylabel('Theta')
-plt.legend()
-plt.title('Forced Damped Pendulum Motion')
-plt.grid()
-plt.show()</p>
-<h1 id="phase-diagram">Phase diagram</h1>
-<p>plt.figure(figsize=(6, 6))
-plt.plot(sol.y[0], sol.y[1], lw=0.5)
-plt.xlabel('Theta')
-plt.ylabel('Angular Velocity')
-plt.title('Phase Diagram')
-plt.grid()
-plt.show()</p>
-<h1 id="poincare-section">Poincare Section</h1>
-<p>times = np.arange(0, t_max, 2*np.pi/omega)
-points = solve_ivp(forced_damped_pendulum, [0, t_max], y0, t_eval=times, args=(q, F, omega))
-plt.figure(figsize=(6, 6))
-plt.scatter(points.y[0], points.y[1], s=5)
-plt.xlabel('Theta')
-plt.ylabel('Angular Velocity')
-plt.title('Poinca Section')
-plt.grid()
-plt.show()</p>
-<p>```</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
