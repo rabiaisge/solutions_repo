@@ -258,5 +258,162 @@ Oscillatory systems are fundamental to many engineering applications, from struc
 By mastering the principles of oscillatory dynamics, engineers and scientists can develop **safer, more efficient, and innovative** solutions to real-world challenges.
 
 
+## Python/ plot
 
+![alt text](image-7.png)
 
+![alt text](image-8.png)
+
+![alt text](image-9.png)
+
+![alt text](image-10.png)
+
+![alt text](image-11.png)![alt text](image-12.png)
+![alt text](image-13.png)
+![alt text](image-14.png)
+![alt text](image-15.png)
+![alt text](image-16.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Define the parameters of the pendulum
+g = 9.81  # Acceleration due to gravity (m/s^2)
+L = 1.0   # Length of the pendulum (m)
+m = 1.0   # Mass of the pendulum bob (kg)
+
+def pendulum_equations(t, y, b, F_ext, omega_d):
+    """
+    Defines the differential equations for the damped and driven pendulum.
+
+    Args:
+        t: Time.
+        y: A list or array containing [theta, omega].
+        b: Damping coefficient.
+        F_ext: Amplitude of the external driving force.
+        omega_d: Angular frequency of the driving force.
+
+    Returns:
+        A list or array containing [dtheta/dt, domega/dt].
+    """
+    theta, omega = y
+    dtheta_dt = omega
+    domega_dt = -(b/m) * omega - (g/L) * np.sin(theta) + F_ext * np.cos(omega_d * t)
+    return [dtheta_dt, domega_dt]
+
+def simulate_pendulum(initial_conditions, time_span, params, num_points=500):
+    """
+    Simulates the pendulum's motion using solve_ivp.
+
+    Args:
+        initial_conditions: A list or array [theta0, omega0].
+        time_span: A tuple (t_start, t_end).
+        params: A dictionary containing 'b', 'F_ext', 'omega_d'.
+        num_points: Number of time points for the solution.
+
+    Returns:
+        A tuple containing the time array and the solution array (theta, omega).
+    """
+    sol = solve_ivp(pendulum_equations, time_span, initial_conditions,
+                    args=(params['b'], params['F_ext'], params['omega_d']),
+                    dense_output=True)
+    t = np.linspace(time_span[0], time_span[1], num_points)
+    theta, omega = sol.sol(t)
+    return t, theta, omega
+
+def plot_motion(t, theta, omega, title="Pendulum Motion"):
+    """Plots the angular displacement and angular velocity over time."""
+    fig, axs = plt.subplots(2, 1, sharex=True, figsize=(10, 6))
+    axs[0].plot(t, theta)
+    axs[0].set_ylabel('Angular Displacement (rad)')
+    axs[1].plot(t, omega)
+    axs[1].set_ylabel('Angular Velocity (rad/s)')
+    axs[1].set_xlabel('Time (s)')
+    axs[0].set_title(title)
+    plt.tight_layout()
+    plt.show()
+
+def plot_phase_diagram(theta, omega, title="Phase Diagram"):
+    """Plots the phase diagram (omega vs theta)."""
+    plt.figure(figsize=(8, 6))
+    plt.plot(theta % (2 * np.pi), omega, lw=0.5)  # Modulo 2*pi to see the pattern clearly
+    plt.xlabel('Angular Displacement (rad) mod 2π')
+    plt.ylabel('Angular Velocity (rad/s)')
+    plt.title(title)
+    plt.grid(True)
+    plt.show()
+
+def poincare_section(t, theta, omega, driving_period, title="Poincaré Section"):
+    """Generates the Poincaré section by sampling at integer multiples of the driving period."""
+    indices = np.where(np.isclose(t % driving_period, 0.0, atol=1e-3))[0]
+    theta_poincare = theta[indices] % (2 * np.pi)
+    omega_poincare = omega[indices]
+    plt.figure(figsize=(8, 6))
+    plt.scatter(theta_poincare, omega_poincare, s=5)
+    plt.xlabel('Angular Displacement (rad) mod 2π')
+    plt.ylabel('Angular Velocity (rad/s)')
+    plt.title(title)
+    plt.grid(True)
+    plt.show()
+
+# --- Simulations ---
+
+# 1. Undamped, Undriven Pendulum (Simple Harmonic Motion)
+params_undamped = {'b': 0, 'F_ext': 0, 'omega_d': 0}
+initial_undamped = [np.pi/4, 0]  # Initial displacement, initial velocity
+time_undamped = (0, 10)
+t_undamped, theta_undamped, omega_undamped = simulate_pendulum(initial_undamped, time_undamped, params_undamped)
+plot_motion(t_undamped, theta_undamped, omega_undamped, title="Undamped, Undriven Pendulum")
+plot_phase_diagram(theta_undamped, omega_undamped, title="Phase Diagram - Undamped, Undriven")
+
+# 2. Damped, Undriven Pendulum
+params_damped = {'b': 0.5, 'F_ext': 0, 'omega_d': 0}
+initial_damped = [np.pi/2, 0]
+time_damped = (0, 20)
+t_damped, theta_damped, omega_damped = simulate_pendulum(initial_damped, time_damped, params_damped)
+plot_motion(t_damped, theta_damped, omega_damped, title="Damped, Undriven Pendulum")
+plot_phase_diagram(theta_damped, omega_damped, title="Phase Diagram - Damped, Undriven")
+
+# 3. Driven Pendulum (Without Damping) - Exploring Resonance
+params_driven_res = {'b': 0, 'F_ext': 0.5, 'omega_d': np.sqrt(g/L)} # Driving frequency near natural frequency
+initial_driven_res = [0.1, 0]
+time_driven_res = (0, 50)
+t_driven_res, theta_driven_res, omega_driven_res = simulate_pendulum(initial_driven_res, time_driven_res, params_driven_res)
+plot_motion(t_driven_res, theta_driven_res, omega_driven_res, title="Driven Pendulum (Resonance)")
+plot_phase_diagram(theta_driven_res, omega_driven_res, title="Phase Diagram - Driven (Resonance)")
+
+# 4. Damped and Driven Pendulum - Exploring Chaos
+params_chaos = {'b': 0.5, 'F_ext': 1.5, 'omega_d': 1.0}
+initial_chaos = [0.2, 0]
+time_chaos = (0, 100)
+t_chaos, theta_chaos, omega_chaos = simulate_pendulum(initial_chaos, time_chaos, params_chaos, num_points=1000)
+plot_motion(t_chaos, theta_chaos, omega_chaos, title="Damped and Driven Pendulum (Potentially Chaotic)")
+plot_phase_diagram(theta_chaos, omega_chaos, title="Phase Diagram - Damped and Driven (Potentially Chaotic)")
+
+# Poincaré Section for the potentially chaotic case
+driving_period_chaos = 2 * np.pi / params_chaos['omega_d']
+poincare_section(t_chaos, theta_chaos, omega_chaos, driving_period_chaos, title="Poincaré Section - Damped and Driven (Potentially Chaotic)")
+
+# 5. Exploring different initial conditions for the chaotic case
+params_chaos_alt_init = {'b': 0.5, 'F_ext': 1.5, 'omega_d': 1.0}
+initial_chaos_alt1 = [0.21, 0]
+initial_chaos_alt2 = [0.2, 0.01]
+time_chaos_alt = (0, 100)
+t_chaos_alt, theta_chaos_alt1, omega_chaos_alt1 = simulate_pendulum(initial_chaos_alt1, time_chaos_alt, params_chaos_alt_init, num_points=1000)
+_, theta_chaos_alt2, omega_chaos_alt2 = simulate_pendulum(initial_chaos_alt2, time_chaos_alt, params_chaos_alt_init, num_points=1000)
+
+plt.figure(figsize=(10, 6))
+plt.plot(t_chaos_alt, theta_chaos_alt1, label='Initial: [0.21, 0]')
+plt.plot(t_chaos_alt, theta_chaos_alt2, label='Initial: [0.2, 0.01]')
+plt.xlabel('Time (s)')
+plt.ylabel('Angular Displacement (rad)')
+plt.title('Sensitivity to Initial Conditions (Potential Chaos)')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+ ```
+
+link:[colab](https://colab.research.google.com/drive/1xQxxf2nBRNmZiK03xTnXA2gYWNoZC7CI?usp=sharing)
