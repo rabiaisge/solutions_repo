@@ -43,6 +43,23 @@ The total time of flight is twice this value:
 
 $$T=\frac{2v_0\sin\theta}{g}$$
 
+### Governing Differential Equations
+
+#### Horizontal Motion
+
+- No horizontal acceleration (ignoring air resistance).
+- Velocity in $x$-direction remains constant:
+
+$$\frac{d^2x}{dt^2}=0$$
+
+- Integrating once:
+
+$$\frac{dx}{dt}=v_0\cos(\theta)$$
+
+- Integrating again:
+
+$$x(t)=v_0\cos(\theta)\cdot t$$
+
 ### 1.2 Derivation of the Range Equation
 
 The range $R$ is the horizontal distance traveled when $y=0$. Using the horizontal motion equation:
@@ -84,21 +101,27 @@ This equation accounts for different launch heights, making it more general.
 
 ## 2. Analysis of the Range
 
-### 2.1 Dependence on the Angle of Projection
+### **2.1 Governing Equation for Range**
 
-The horizontal range $R$ depends on the angle of projection $\theta$ as:
+The horizontal range $R$ of a projectile launched from the ground at an initial velocity $v_0$ and angle $\theta$ (assuming no air resistance) is given by:
 
-$$R=\frac{v_0^2\sin2\theta}{g}$$
+$$R=\frac{v_0^2\sin(2\theta)}{g}$$
 
-This function is symmetric about $45^\circ$, meaning that complementary angles ($\theta$ and $90^\circ - \theta$) result in the same range. The maximum range occurs when:
+where:
 
-$$\theta=45^\circ$$
+- $v_0$ is the initial velocity,
+- $g$ is the acceleration due to gravity,
+- $\theta$ is the launch angle.
 
-At this angle, the sine function reaches its maximum value of 1, giving:
+### **2.2 Dependence on the Angle of Projection**
 
-$$R_{max}=\frac{v_0^2}{g}$$
+The function $R(\theta)$ is determined by the term $\sin(2\theta)$. Since the sine function has a maximum value of 1 at $90^\circ$, the range is maximized when:
 
-### 2.2 Influence of Initial Velocity
+$$2\theta=90^\circ \Rightarrow \theta=45^\circ$$
+
+Thus, the optimal launch angle for maximum range in an idealized scenario is $\theta=45^\circ$.
+
+### 2.3 Influence of Initial Velocity
 
 From the range equation:
 
@@ -106,7 +129,7 @@ $$R \propto v_0^2$$
 
 This quadratic relationship implies that doubling the initial velocity results in a fourfold increase in range.
 
-### 2.3 Influence of Gravitational Acceleration
+### 2.4 Influence of Gravitational Acceleration
 
 Since:
 
@@ -174,6 +197,9 @@ Practical projectile motion problems require considering additional forces and i
 
 
 ![**alt text**](image-1.png)
+
+
+![alt text](image-17.png)
 
 ![alt text](image-5.png)
 
