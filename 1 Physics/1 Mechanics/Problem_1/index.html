@@ -194,6 +194,21 @@
 <div class="arithmatex">\[t_{max}=\frac{v_0\sin\theta}{g}\]</div>
 <p>The total time of flight is twice this value:</p>
 <div class="arithmatex">\[T=\frac{2v_0\sin\theta}{g}\]</div>
+<h3 id="governing-differential-equations">Governing Differential Equations</h3>
+<h4 id="horizontal-motion_1">Horizontal Motion</h4>
+<ul>
+<li>No horizontal acceleration (ignoring air resistance).</li>
+<li>Velocity in <span class="arithmatex">\(x\)</span>-direction remains constant:</li>
+</ul>
+<div class="arithmatex">\[\frac{d^2x}{dt^2}=0\]</div>
+<ul>
+<li>Integrating once:</li>
+</ul>
+<div class="arithmatex">\[\frac{dx}{dt}=v_0\cos(\theta)\]</div>
+<ul>
+<li>Integrating again:</li>
+</ul>
+<div class="arithmatex">\[x(t)=v_0\cos(\theta)\cdot t\]</div>
 <h3 id="12-derivation-of-the-range-equation">1.2 Derivation of the Range Equation</h3>
 <p>The range <span class="arithmatex">\(R\)</span> is the horizontal distance traveled when <span class="arithmatex">\(y=0\)</span>. Using the horizontal motion equation:</p>
 <div class="arithmatex">\[R=v_xT\]</div>
@@ -218,18 +233,24 @@
 <p>This equation accounts for different launch heights, making it more general.</p>
 <hr/>
 <h2 id="2-analysis-of-the-range">2. Analysis of the Range</h2>
-<h3 id="21-dependence-on-the-angle-of-projection">2.1 Dependence on the Angle of Projection</h3>
-<p>The horizontal range <span class="arithmatex">\(R\)</span> depends on the angle of projection <span class="arithmatex">\(\theta\)</span> as:</p>
-<div class="arithmatex">\[R=\frac{v_0^2\sin2\theta}{g}\]</div>
-<p>This function is symmetric about <span class="arithmatex">\(45^\circ\)</span>, meaning that complementary angles (<span class="arithmatex">\(\theta\)</span> and <span class="arithmatex">\(90^\circ - \theta\)</span>) result in the same range. The maximum range occurs when:</p>
-<div class="arithmatex">\[\theta=45^\circ\]</div>
-<p>At this angle, the sine function reaches its maximum value of 1, giving:</p>
-<div class="arithmatex">\[R_{max}=\frac{v_0^2}{g}\]</div>
-<h3 id="22-influence-of-initial-velocity">2.2 Influence of Initial Velocity</h3>
+<h3 id="21-governing-equation-for-range"><strong>2.1 Governing Equation for Range</strong></h3>
+<p>The horizontal range <span class="arithmatex">\(R\)</span> of a projectile launched from the ground at an initial velocity <span class="arithmatex">\(v_0\)</span> and angle <span class="arithmatex">\(\theta\)</span> (assuming no air resistance) is given by:</p>
+<div class="arithmatex">\[R=\frac{v_0^2\sin(2\theta)}{g}\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(v_0\)</span> is the initial velocity,</li>
+<li><span class="arithmatex">\(g\)</span> is the acceleration due to gravity,</li>
+<li><span class="arithmatex">\(\theta\)</span> is the launch angle.</li>
+</ul>
+<h3 id="22-dependence-on-the-angle-of-projection"><strong>2.2 Dependence on the Angle of Projection</strong></h3>
+<p>The function <span class="arithmatex">\(R(\theta)\)</span> is determined by the term <span class="arithmatex">\(\sin(2\theta)\)</span>. Since the sine function has a maximum value of 1 at <span class="arithmatex">\(90^\circ\)</span>, the range is maximized when:</p>
+<div class="arithmatex">\[2\theta=90^\circ \Rightarrow \theta=45^\circ\]</div>
+<p>Thus, the optimal launch angle for maximum range in an idealized scenario is <span class="arithmatex">\(\theta=45^\circ\)</span>.</p>
+<h3 id="23-influence-of-initial-velocity">2.3 Influence of Initial Velocity</h3>
 <p>From the range equation:</p>
 <div class="arithmatex">\[R \propto v_0^2\]</div>
 <p>This quadratic relationship implies that doubling the initial velocity results in a fourfold increase in range.</p>
-<h3 id="23-influence-of-gravitational-acceleration">2.3 Influence of Gravitational Acceleration</h3>
+<h3 id="24-influence-of-gravitational-acceleration">2.4 Influence of Gravitational Acceleration</h3>
 <p>Since:</p>
 <div class="arithmatex">\[R \propto \frac{1}{g}\]</div>
 <p>A higher gravitational acceleration reduces the range, which explains why projectiles on the Moon (where <span class="arithmatex">\(g\)</span> is lower) travel much farther than on Earth.</p>
@@ -268,6 +289,7 @@
 <p>Practical projectile motion problems require considering additional forces and irregular surfaces. Understanding these factors is crucial in fields like aerospace engineering, ballistics, and sports science. The combination of analytical and computational approaches provides deeper insights into real-world projectile dynamics.</p>
 <h2 id="4-python-plot"><strong>4. python/ plot</strong></h2>
 <p><img alt="**alt text**" src="../image-1.png"/></p>
+<p><img alt="alt text" src="../image-17.png"/></p>
 <p><img alt="alt text" src="../image-5.png"/></p>
 <pre><code class="language-python">
 
