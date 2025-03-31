@@ -195,8 +195,11 @@ where:
 - $C_p$ is the capacitance of the piezoelectric element.
 
 **Applications:**
+
 - Powering remote sensors in industrial and environmental monitoring.
+
 - Harvesting kinetic energy from human motion for wearable electronics.
+
 - Utilizing ocean wave energy for renewable power generation.
 
 ## 🌉 2. Suspension Bridges
@@ -268,10 +271,16 @@ By mastering the principles of oscillatory dynamics, engineers and scientists ca
 
 ![alt text](image-10.png)
 
-![alt text](image-11.png)![alt text](image-12.png)
+![alt text](image-11.png)
+
+![alt text](image-12.png)
+
 ![alt text](image-13.png)
+
 ![alt text](image-14.png)
+
 ![alt text](image-15.png)
+
 ![alt text](image-16.png)
 
 ```python
@@ -414,6 +423,6 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
- ```
+```
 
 link:[colab](https://colab.research.google.com/drive/1xQxxf2nBRNmZiK03xTnXA2gYWNoZC7CI?usp=sharing)
