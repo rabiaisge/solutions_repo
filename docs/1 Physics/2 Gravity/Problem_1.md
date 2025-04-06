@@ -396,4 +396,4 @@ plt.grid(True)
 plt.show()
 ```
 
-[link](link):[colab](https://colab.research.google.com/drive/15dVFKRnSTdkcc8ko5z_6dBovlLm7MtEJ?usp=sharing)
+Link:[colab](https://colab.research.google.com/drive/15dVFKRnSTdkcc8ko5z_6dBovlLm7MtEJ?usp=sharing)
