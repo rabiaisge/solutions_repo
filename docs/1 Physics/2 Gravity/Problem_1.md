@@ -332,70 +332,57 @@ Next step? Implement this with **code and graphs** using real planetary datasets
 
 
 ```python
+# Orbital simulation and Kepler's Third Law verification
+
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.constants import G
+from math import pi
 
-# Constants
-G = 6.67430e-11  # Gravitational constant (m^3 kg^-1 s^-2)
+# --- Adjustable Parameters ---
+M_central = 5.972e24     # Central mass (e.g., Earth) in kg
+m_orbiting = 1000        # Orbiting body mass in kg (not used in Kepler's law)
+radii = np.linspace(1e7, 5e7, 10)  # Orbital radii in meters
 
-# Function to calculate the orbital period based on Kepler's Third Law
-def orbital_period(mass_central, radius):
-    # Kepler's third law: T^2 = (4 * pi^2 * r^3) / (G * M)
-    T = 2 * np.pi * np.sqrt(radius**3 / (G * mass_central))
-    return T
+# --- Calculate orbital period for each radius ---
+def orbital_period(radius, M):
+    return 2 * pi * np.sqrt(radius**3 / (G * M))
 
-# Function to simulate the orbit
-def simulate_orbit(mass_central, radius, num_points=1000):
-    # Orbital velocity
-    v = np.sqrt(G * mass_central / radius)
-    
-    # Angular velocity
-    omega = v / radius
-    
-    # Time array (from 0 to T)
-    T = orbital_period(mass_central, radius)
-    time = np.linspace(0, T, num_points)
-    
-    # Orbital position as a function of time (circular motion)
-    x = radius * np.cos(omega * time)
-    y = radius * np.sin(omega * time)
-    
-    return x, y, time, T
+periods = np.array([orbital_period(r, M_central) for r in radii])
 
-# Adjustable parameters for experimentation
-mass_central = 5.972e24  # Mass of Earth in kg
-radius = 1.496e11        # Orbital radius (approx distance from Earth to Sun in meters)
+# --- Kepler's Third Law Check: T² ∝ r³ ---
+T_squared = periods**2
+r_cubed = radii**3
 
-# Simulate orbit
-x, y, time, period = simulate_orbit(mass_central, radius)
+# --- Plotting ---
+plt.figure(figsize=(12, 5))
 
-# Plotting the orbit
-plt.figure(figsize=(8,8))
-plt.plot(x, y, label="Orbit Path")
-plt.scatter([0], [0], color='red', label="Central Mass (Sun/Earth)", zorder=5)
-plt.title(f"Orbit Simulation (Period: {period/86400:.2f} days)")
-plt.xlabel("X Position (m)")
-plt.ylabel("Y Position (m)")
-plt.gca().set_aspect('equal', adjustable='box')
-plt.legend()
+# Orbital path example
+plt.subplot(1, 2, 1)
+theta = np.linspace(0, 2*pi, 100)
+r_example = 3e7
+x = r_example * np.cos(theta)
+y = r_example * np.sin(theta)
+plt.plot(x, y)
+plt.plot(0, 0, 'yo', label='Central Body')
+plt.title('Circular Orbit (Example)')
+plt.xlabel('x (m)')
+plt.ylabel('y (m)')
+plt.axis('equal')
 plt.grid(True)
+plt.legend()
+
+# Kepler’s Law Plot
+plt.subplot(1, 2, 2)
+plt.plot(r_cubed, T_squared, 'bo-')
+plt.title("Kepler's Third Law Verification")
+plt.xlabel('r³ (m³)')
+plt.ylabel('T² (s²)')
+plt.grid(True)
+
+plt.tight_layout()
 plt.show()
 
-# Verify the T^2 ∝ r^3 relationship
-r_values = np.logspace(6, 12, num=100)  # Ranges from 10^6 meters to 10^12 meters
-T_values = [orbital_period(mass_central, r) for r in r_values]
-
-# Plot T^2 vs. r^3 to verify the relationship
-plt.figure(figsize=(8,6))
-plt.plot(r_values**(3/2), np.array(T_values)**2, label=r"$T^2 \propto r^3$")
-plt.xscale('log')
-plt.yscale('log')
-plt.xlabel(r"$r^{3/2}$ (m^3/2)")
-plt.ylabel(r"$T^2$ (s^2)")
-plt.title(r"Verification of Kepler's Third Law: $T^2 \propto r^3$")
-plt.legend()
-plt.grid(True)
-plt.show()
 ```
 
 Link:[colab](https://colab.research.google.com/drive/15dVFKRnSTdkcc8ko5z_6dBovlLm7MtEJ?usp=sharing)
