@@ -327,7 +327,9 @@ Next step? Implement this with **code and graphs** using real planetary datasets
 ![alt text](image-5.png)
 
 
-![alt text](image-6.png)
+![alt text](image-6.png)![alt text](https://github.com/rabiaisge/solutions_repo/blob/main/docs/1%20Physics/2%20Gravity/image-2.png?raw=true)
+
+
 
 
 
