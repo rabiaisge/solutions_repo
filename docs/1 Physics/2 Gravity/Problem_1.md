@@ -322,9 +322,11 @@ Next step? Implement this with **code and graphs** using real planetary datasets
 
 ---
 
-
+# Python/plot
 
 ![alt text](image-5.png)
+
+
 ![alt text](image-6.png)
 
 
