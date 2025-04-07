@@ -1,3 +1,6 @@
+# Derivation of the Relationship Between Orbital Period and Orbital Radius
+
+
 # 1. Theoretical Derivation 📘
 
 ## 📌 Introduction
@@ -322,7 +325,7 @@ Next step? Implement this with **code and graphs** using real planetary datasets
 
 ---
 
-# Python/plot
+# Python / plot
 
 ![alt text](image-5.png)
 
