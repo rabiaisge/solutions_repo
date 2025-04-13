@@ -413,8 +413,6 @@ We will plot the **first**, **second**, and **third cosmic velocities** for each
 
 
 ![alt text](image-12.png)
-
-
 ---
 ```python
 import matplotlib.pyplot as plt
@@ -461,7 +459,6 @@ We will create two plots to investigate how the cosmic velocities vary with the
 #### 2. **Velocity vs. Planet Radius**
 
 ![alt text](image-14.png)
-
 ---
 
 ### 🌐 Optional: 3D or Animation-Based Visuals for Conceptual Understanding
