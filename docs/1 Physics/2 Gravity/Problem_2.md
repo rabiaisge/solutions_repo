@@ -549,3 +549,5 @@ The **third cosmic velocity** is the velocity needed to escape not just a planet
 The understanding and application of the **first**, **second**, and **third cosmic velocities** are fundamental for planning space missions, from launching satellites into Earth orbit to sending probes into interstellar space. These velocities help scientists and engineers design spacecraft that can successfully complete their missions and overcome the gravitational challenges posed by celestial bodies.
 
 Space exploration will continue to rely on these principles to push the boundaries of our solar system and beyond, and understanding them is key to missions like **Voyager**, **Artemis**, and future interstellar travel.
+
+
