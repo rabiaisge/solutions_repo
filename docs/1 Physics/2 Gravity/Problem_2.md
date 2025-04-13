@@ -346,7 +346,7 @@ The result will give the orbital velocity of Jupiter in meters per second.
 
 ## Python Code Implementation
 
-To calculate the orbital velocities, the following Python function can be implemented:
+
 
 ```python
 import math
@@ -374,57 +374,181 @@ print(f"Orbital velocity of Earth: {v_earth:.2f} m/s")
 print(f"Orbital velocity of Mars: {v_mars:.2f} m/s")
 print(f"Orbital velocity of Jupiter: {v_jupiter:.2f} m/s")
 ```
-# 4. Code to Simulate and Visualize Velocities
-
-I will generate plots to:
-
-Compare the velocities of the planets.
-Visualize how velocity changes with different masses and radii.
 
 
-![alt text](image-7.png)
+---
 
+### 📊 Tabulated Results
+
+The table will look like this (values may vary slightly based on precision):
+
+| Planet  | v₁ (Orbital) [km/s] | v₂ (Escape) [km/s] | v₃ (Solar Escape) [km/s] |
+|---------|----------------------|---------------------|---------------------------|
+| Earth   | ~7.91                | ~11.18              | ~42.1                     |
+| Mars    | ~3.56                | ~5.03               | ~34.1                     |
+| Jupiter | ~42.1                | ~59.5               | ~87.3                     |
+
+---
+
+### 📌 Notes
+
+- These computations assume:
+  - Spherical symmetry
+  - No atmospheric drag
+  - Instantaneous velocity achieved (no thrust phase)
+
+- $v_3$ is **approximate** and assumes escape velocity from Sun calculated at the orbital distance of the planet.
+
+---
+
+## 4. Visualizations/Plots
+
+In this section, we create visualizations to compare the cosmic velocities for Earth, Mars, and Jupiter. We will also explore how the velocities relate to the planet's mass and radius.
+
+---
+
+### 📊 Bar Chart: Cosmic Velocities for Earth, Mars, and Jupiter
+
+We will plot the **first**, **second**, and **third cosmic velocities** for each planet using bar charts for easy comparison.
+
+
+![alt text](image-12.png)
+
+
+---
 ```python
-import numpy as np
 import matplotlib.pyplot as plt
 
-# Gravitational constant
-G = 6.67430e-11  # m^3 kg^-1 s^-2
+# Extracting data for plotting
+planets_names = ['Earth', 'Mars', 'Jupiter']
+v1_values = [row['v1 (Orbital) [km/s]'] for _, row in df.iterrows()]
+v2_values = [row['v2 (Escape) [km/s]'] for _, row in df.iterrows()]
+v3_values = [row['v3 (Solar Escape) [km/s]'] for _, row in df.iterrows()]
 
-# Planetary data (Mass in kg, Radius in meters)
-planets = {
-    'Earth': {'mass': 5.97e24, 'radius': 1.496e11},
-    'Mars': {'mass': 6.39e23, 'radius': 2.279e11},
-    'Jupiter': {'mass': 1.898e27, 'radius': 7.785e11}
-}
+# Bar chart
+fig, ax = plt.subplots(figsize=(10, 6))
+width = 0.25  # Bar width
+x = np.arange(len(planets_names))
 
-# Function to calculate orbital velocity
-def orbital_velocity(mass, radius):
-    return np.sqrt(G * mass / radius)
+# Create bars for each velocity type
+ax.bar(x - width, v1_values, width, label='First Cosmic Velocity')
+ax.bar(x, v2_values, width, label='Second Cosmic Velocity')
+ax.bar(x + width, v3_values, width, label='Third Cosmic Velocity')
 
-# Calculate velocities for each planet
-velocities = {planet: orbital_velocity(data['mass'], data['radius']) for planet, data in planets.items()}
+# Formatting
+ax.set_xlabel('Planets')
+ax.set_ylabel('Velocity (km/s)')
+ax.set_title('Cosmic Velocities for Earth, Mars, and Jupiter')
+ax.set_xticks(x)
+ax.set_xticklabels(planets_names)
+ax.legend()
 
-# Plotting velocities across the three planets
-plt.figure(figsize=(8, 6))
-plt.bar(velocities.keys(), velocities.values(), color=['blue', 'red', 'green'])
-plt.title('Orbital Velocities of Planets')
-plt.xlabel('Planets')
-plt.ylabel('Orbital Velocity (m/s)')
+plt.tight_layout()
 plt.show()
 ```
-5. Effect of Mass and Radius on Velocity
 
-a) Effect of Mass:
+### 🌍 Velocity vs. Planet Mass and Radius
 
-![alt text](image-8.png)
+We will create two plots to investigate how the cosmic velocities vary with the **planet's mass** and **radius**. 
+
+#### 1. **Velocity vs. Planet Mass**
+
+We will create two plots to investigate how the cosmic velocities vary with the
+
+![alt text](image-13.png)
+---
+
+#### 2. **Velocity vs. Planet Radius**
+
+![alt text](image-14.png)
+
+---
+
+### 🌐 Optional: 3D or Animation-Based Visuals for Conceptual Understanding
+
+For deeper understanding, we can visualize the velocities in **3D space** or through **animations**.
+
+#### 1. **3D Plot of Cosmic Velocities**
+
+![alt text](image-15.png)
+---
 
 
-b) Effect of Radius:
+#### 2. **Animation of Planetary Escape**
 
-![alt text](image-9.png)
+![alt text](image-16.png)
+---
 
 
-6. Interactive Sliders (Optional)
+![alt text](image-17.png)
+---
 
-![alt text](image-11.png)
+
+### 📈 Final Thoughts
+
+- The bar charts and line plots offer a comparative view of **cosmic velocities** across different planets.
+---
+
+## 5. Application & Discussion
+
+### 🚀 1. Importance of Each Cosmic Velocity in Real-World Space Missions
+
+The concept of **cosmic velocities** plays a crucial role in modern space exploration. Understanding these velocities is essential for designing spacecraft and planning interplanetary or interstellar missions. Here we explore the significance of each cosmic velocity:
+
+#### 1.1 **First Cosmic Velocity (Orbital Velocity)**
+
+The **first cosmic velocity** is the minimum speed required for an object to remain in a stable orbit around a planet or star. 
+
+- **Application**: 
+ - **Satellite Launches**: The first cosmic velocity is key for**launching satellites** into orbit around Earth. A rocket must reach at least this speed to counteract Earth's gravity and stay in orbit. 
+ - **Space Stations**: The **International Space Station (ISS)** orbits at an approximate velocity of 7.66 km/s, which is just slightly above Earth's first cosmic velocity.
+
+- **Example**: The launch of the **Hubble Space Telescope** required achieving this velocity to ensure it could stay in orbit around Earth.
+
+
+#### 1.2 **Second Cosmic Velocity (Escape Velocity)**
+
+The **second cosmic velocity** is the minimum velocity required to escape a celestial body's gravitational influence. This is the speed needed for a spacecraft to break free from Earth’s gravity without further propulsion.
+
+- **Application**: 
+ - **Escape from Earth's Gravity**: Spacecraft like the **Apollo missions** or the **Mars rovers** use this velocity to leave Earth’s atmosphere and escape into interplanetary space.
+ - **Launching Interplanetary Missions**: Rockets need to achieve the second cosmic velocity to send spacecraft on interplanetary missions (e.g., to Mars or Jupiter).
+
+- **Example**: The **Voyager 1** probe, launched in 1977, reached an escape velocity of around 16.5 km/s, allowing it to break free from Earth’s gravitational influence and begin its journey to interstellar space.
+
+#### 1.3 **Third Cosmic Velocity (Solar System Escape Velocity)**
+
+The **third cosmic velocity** is the velocity needed to escape not just a planet, but the **entire solar system**, including escaping the Sun’s gravity.
+
+- **Application**:
+- **Interstellar Missions**: This velocity is required for spacecraft to leave the solar system completely. It is crucial for **interstellar missions** or sending probes to distant stars or galaxies.
+- **Escape from Solar System**: Missions aiming to travel beyond the influence of the Sun’s gravity need to achieve this velocity.
+
+- **Example**: The **Voyager 1** spacecraft achieved this velocity after escaping Earth’s gravity, enabling it to travel toward the **interstellar medium**. Currently, it is the farthest human-made object from Earth.
+
+---
+
+### 🌌 2. Relating Cosmic Velocities to Historical and Planned Space Missions
+
+#### 2.1 **Voyager Missions (Voyager 1 & 2)**
+
+- **Voyager 1**, launched in 1977, and **Voyager 2**, launched in 1977 as well, are key examples of space probes that have used the second and third cosmic velocities to escape Earth’s gravity and the Sun's gravitational pull.
+- Voyager 1 has now entered **interstellar space**, surpassing the **third cosmic velocity** to journey beyond our solar system. It is currently over **22 billion kilometers** from Earth, and its mission is to study the outer boundaries of our solar system and beyond.
+
+#### 2.2 **Artemis Program**
+
+- NASA’s **Artemis program**, planned for the coming years, aims to send humans back to the Moon and eventually to Mars. For the **Artemis I** mission (uncrewed), the spacecraft will need to reach at least the second cosmic velocity to escape Earth's atmosphere and travel to the Moon.
+- For future Mars missions, **interplanetary velocities** will need to be carefully calculated to ensure efficient travel between Earth and Mars, taking into account the changing positions of the planets as they orbit the Sun.
+
+#### 2.3 **Mars Rover Missions**
+
+- NASA's **Mars rovers**, such as **Curiosity** and **Perseverance**, need to overcome Earth's gravity (second cosmic velocity) to reach Mars, and then use orbital velocities to safely enter Mars’ atmosphere for landing. 
+- Once in orbit around Mars, they perform scientific investigations about the Martian surface and its potential for past life.
+
+---
+
+### 🌠 3. Conclusion
+
+The understanding and application of the **first**, **second**, and **third cosmic velocities** are fundamental for planning space missions, from launching satellites into Earth orbit to sending probes into interstellar space. These velocities help scientists and engineers design spacecraft that can successfully complete their missions and overcome the gravitational challenges posed by celestial bodies.
+
+Space exploration will continue to rely on these principles to push the boundaries of our solar system and beyond, and understanding them is key to missions like **Voyager**, **Artemis**, and future interstellar travel.
