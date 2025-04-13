@@ -551,4 +551,3 @@ The understanding and application of the **first**, **second**, and **third cosm
 Space exploration will continue to rely on these principles to push the boundaries of our solar system and beyond, and understanding them is key to missions like **Voyager**, **Artemis**, and future interstellar travel.
 
 
-[link]([text](https://colab.research.google.com/drive/1l5TcFYZYQd92ETzcNrbOvPScOuF4E_uo?usp=sharing))
