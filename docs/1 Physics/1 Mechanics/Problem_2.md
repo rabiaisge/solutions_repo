@@ -1,4 +1,5 @@
 # Problem 2
+
 # 📚 Theoretical Foundation of the Forced Damped Pendulum
 
 ## 1️⃣ Formulating the Differential Equation for the Forced Damped Pendulum ⚖️
