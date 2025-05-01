@@ -507,7 +507,129 @@ plt.show()
 </code></pre>
 <hr/>
 <h1 id="interactive-wave-interference-simulation-with-animation-with-sliders">Interactive Wave Interference Simulation with Animation (with sliders)</h1>
-<p><img alt="alt text" src="../image-3.png"/></p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import animation
+from IPython.display import display, HTML, clear_output
+import ipywidgets as widgets
+import matplotlib as mpl
+
+# Gömülecek maksimum animasyon boyutunu yükselt
+mpl.rcParams['animation.embed_limit'] = 50_000_000
+
+# Sabit grid
+x = np.linspace(-10, 10, 200)
+y = np.linspace(-10, 10, 200)
+X, Y = np.meshgrid(x, y)
+
+# Parametreleri tut
+params = {
+    'A': 1.0,
+    'wavelength': 2.0,
+    'f': 1.0,
+    'phase_diff': 0.0,
+    'R': 3.0,
+    'N': 3
+}
+
+def compute_frame(t):
+    A = params['A']
+    wavelength = params['wavelength']
+    f = params['f']
+    phase_diff = params['phase_diff']
+    R = params['R']
+    N = int(params['N'])
+
+    k = 2 * np.pi / wavelength
+    omega = 2 * np.pi * f
+
+    eta_sum = np.zeros_like(X)
+
+    for i in range(N):
+        angle = 2 * np.pi * i / N
+        sx = R * np.cos(angle)
+        sy = R * np.sin(angle)
+        r = np.sqrt((X - sx)**2 + (Y - sy)**2)
+        phi = i * phase_diff
+        eta = A / np.sqrt(r + 0.1) * np.cos(k * r - omega * t + phi)
+        eta_sum += eta
+
+    return eta_sum
+
+# Animasyon oluşturma fonksiyonu
+def create_animation():
+    fig, ax = plt.subplots(figsize=(6, 6))
+    img = ax.imshow(np.zeros_like(X), extent=[-10, 10, -10, 10], cmap='viridis', origin='lower')
+    cb = plt.colorbar(img, ax=ax)
+    ax.set_title('Interference Pattern')
+
+    def update(frame):
+        eta = compute_frame(frame / 10.0)
+        img.set_data(eta)
+        return [img]
+
+    ani = animation.FuncAnimation(fig, update, frames=100, interval=50, blit=True)
+    plt.close()
+    return HTML(ani.to_jshtml())
+
+# Widgetlar
+A_slider = widgets.FloatSlider(value=1.0, min=0.1, max=5.0, step=0.1, description='Amplitude')
+wavelength_slider = widgets.FloatSlider(value=2.0, min=0.5, max=10.0, step=0.1, description='Wavelength')
+f_slider = widgets.FloatSlider(value=1.0, min=0.1, max=5.0, step=0.1, description='Frequency')
+phase_slider = widgets.FloatSlider(value=0.0, min=0.0, max=2*np.pi, step=0.1, description='Phase Δφ')
+R_slider = widgets.FloatSlider(value=3.0, min=1.0, max=10.0, step=0.5, description='Radius R')
+N_slider = widgets.IntSlider(value=3, min=2, max=10, step=1, description='Sources N')
+
+sliders = [A_slider, wavelength_slider, f_slider, phase_slider, R_slider, N_slider]
+
+# Her değişiklikte animasyonu yenile
+output = widgets.Output()
+
+def on_slider_change(change):
+    # Güncel değerleri al
+    params['A'] = A_slider.value
+    params['wavelength'] = wavelength_slider.value
+    params['f'] = f_slider.value
+    params['phase_diff'] = phase_slider.value
+    params['R'] = R_slider.value
+    params['N'] = N_slider.value
+
+    with output:
+        clear_output(wait=True)
+        display(create_animation())
+
+for s in sliders:
+    s.observe(on_slider_change, names='value')
+
+# İlk gösterim
+on_slider_change(None)
+
+# Tüm arayüz
+controls = widgets.VBox(sliders)
+display(widgets.HBox([controls, output]))
+
+</code></pre>
+<p><a href="https://colab.research.google.com/drive/1hfJSBa6viabQ6Nu6VgxikyWLtrBGrjvc#scrollTo=nrSTgKbf0PBA&amp;line=2&amp;uniqifier=1">https://colab.research.google.com/drive/1hfJSBa6viabQ6Nu6VgxikyWLtrBGrjvc#scrollTo=nrSTgKbf0PBA&amp;line=2&amp;uniqifier=1:</a></p>
+<h2 id="description">Description:</h2>
+<p>This Python code creates an interactive and animated simulation of wave interference, designed to run inside a Jupyter Notebook or Google Colab environment.</p>
+<hr/>
+<h3 id="what-it-does_2">🔧 What It Does:</h3>
+<pre><code>•   Simulates circular waves emitted from multiple sources arranged in a regular polygon (triangle, square, pentagon, etc.).
+•   Calculates the resulting interference pattern by summing all wave contributions over a 2D grid using the superposition principle.
+•   Uses matplotlib.animation to generate a looping animation of the wave field over time.
+•   Displays an interactive control panel (sliders) using ipywidgets to let users change key parameters in real-time:
+•   Amplitude (A)
+•   Wavelength (λ)
+•   Frequency (f)
+•   Phase Difference (Δφ)
+•   Polygon Radius (R)
+•   Number of Sources (N)
+</code></pre>
+<h3 id="output_1">🖼 Output:</h3>
+<pre><code>•   Left: Interactive sliders for adjusting parameters.
+•   Right: Real-time animated heatmap showing the interference pattern evolving over time.
+•   The color pattern represents wave peaks and troughs, showing constructive and destructive interference zones.
+</code></pre>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
