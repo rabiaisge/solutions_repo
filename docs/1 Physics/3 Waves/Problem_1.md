@@ -467,3 +467,4 @@ This Python code creates an interactive and animated simulation of wave interfer
 	•	Left: Interactive sliders for adjusting parameters.
 	•	Right: Real-time animated heatmap showing the interference pattern evolving over time.
 	•	The color pattern represents wave peaks and troughs, showing constructive and destructive interference zones.
+  
