@@ -312,7 +312,7 @@ Helps visualize how different field setups affect particle motion — such as ci
 
 https://colab.research.google.com/drive/17Ii1vDdz-1lLsmpS8hFB4P0gQn_fb6nJ#scrollTo=kaCkWEGUDROL&line=78&uniqifier=1
 
-
+https://colab.research.google.com/drive/1eAPl8v0tXUfGH_QkqfvQFNFxfENQNp_i#scrollTo=7CHEi8_1p0Z0
 
 ## 6. Real-World Relevance
 - Cyclotrons exploit circular motion in magnetic fields.  
