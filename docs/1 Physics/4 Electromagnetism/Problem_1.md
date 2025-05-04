@@ -314,6 +314,8 @@ https://colab.research.google.com/drive/17Ii1vDdz-1lLsmpS8hFB4P0gQn_fb6nJ#scroll
 
 [link](https://colab.research.google.com/drive/17Ii1vDdz-1lLsmpS8hFB4P0gQn_fb6nJ#scrollTo=kaCkWEGUDROL&line=78&uniqifier=1)
 
+https://colab.research.google.com/drive/17Ii1vDdz-1lLsmpS8hFB4P0gQn_fb6nJ#scrollTo=kaCkWEGUDROL&line=78&uniqifier=1
+
 ## 6. Real-World Relevance
 - Cyclotrons exploit circular motion in magnetic fields.  
 - Magnetic traps and Penning traps confine particles using combined E and B fields.  
