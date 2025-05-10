@@ -281,4 +281,3 @@ imageio.mimsave('interference_5_sources.gif', gif_frames, duration=0.1)
 print("GIF saved as 'interference_5_sources.gif'")
 ````
 
-[COLAB LINK]([text](https://colab.research.google.com/drive/1g-gndEXOWJrAqmOlNLrYvAsmj6c8frek#scrollTo=dHW_wmrAuXYr&line=45&uniqifier=1))
