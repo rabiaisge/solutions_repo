@@ -210,12 +210,15 @@ plot_wave(Z4, "Four Sources (Square)")
 plot_wave(Z5, "Five Sources (Pentagon)")
 ````
 
+
 ### GIF Code 
 
 ![alt text](interference_5_sources-1.gif)
 
 
+
 ```python
+
 import numpy as np
 import matplotlib.pyplot as plt
 import imageio
