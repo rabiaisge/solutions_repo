@@ -294,74 +294,85 @@
 <p><img alt="alt text" src="../image-5.png"/>
 <img alt="alt text" src="../image-6.png"/>
 <img alt="alt text" src="../image-7.png"/></p>
-<p>```python
-import numpy as np
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D</p>
-<h1 id="define-the-grid">Define the grid</h1>
-<p>x = np.linspace(-10, 10, 500)
+from mpl_toolkits.mplot3d import Axes3D
+
+# Define the grid
+x = np.linspace(-10, 10, 500)
 y = np.linspace(-10, 10, 500)
-X, Y = np.meshgrid(x, y)</p>
-<h1 id="define-wave-parameters">Define wave parameters</h1>
-<p>wavelength = 2  # Wavelength
+X, Y = np.meshgrid(x, y)
+
+# Define wave parameters
+wavelength = 2  # Wavelength
 k = 2 * np.pi / wavelength  # Wave number
 omega = 2 * np.pi / 5       # Angular frequency
-t = 0  # Static time for snapshot (can be animated)</p>
-<h1 id="function-to-create-a-wave-from-a-single-source">Function to create a wave from a single source</h1>
-<p>def single_wave(X, Y, source):
-    r = np.sqrt((X - source[0])<strong>2 + (Y - source[1])</strong>2)
-    return np.sin(k * r - omega * t)</p>
-<h1 id="function-to-sum-multiple-waves-from-different-sources">Function to sum multiple waves from different sources</h1>
-<p>def multiple_waves(X, Y, sources):
+t = 0  # Static time for snapshot (can be animated)
+
+# Function to create a wave from a single source
+def single_wave(X, Y, source):
+    r = np.sqrt((X - source[0])**2 + (Y - source[1])**2)
+    return np.sin(k * r - omega * t)
+
+# Function to sum multiple waves from different sources
+def multiple_waves(X, Y, sources):
     Z = np.zeros_like(X)
     for source in sources:
         Z += single_wave(X, Y, source)
-    return Z</p>
-<h1 id="-">------------------------</h1>
-<h1 id="sources-definitions">Sources definitions</h1>
-<h1 id="-_1">------------------------</h1>
-<p>sources_1 = [(0, 0)]</p>
-<p>distance = 5
-sources_4 = [(-distance, -distance), (-distance, distance), (distance, -distance), (distance, distance)]</p>
-<p>radius = 5
+    return Z
+
+# ------------------------
+# Sources definitions
+# ------------------------
+sources_1 = [(0, 0)]
+
+distance = 5
+sources_4 = [(-distance, -distance), (-distance, distance), (distance, -distance), (distance, distance)]
+
+radius = 5
 angles = np.linspace(0, 2 * np.pi, 6)[:-1]
-sources_5 = [(radius * np.cos(a), radius * np.sin(a)) for a in angles]</p>
-<h1 id="-_2">------------------------</h1>
-<h1 id="plotting-function">Plotting Function</h1>
-<h1 id="-_3">------------------------</h1>
-<p>def plot_wave(Z, title):
-    fig, axs = plt.subplots(1, 2, figsize=(18, 8))  # BIGGER SIZE</p>
-<pre><code># Heatmap
-im = axs[0].imshow(Z, extent=[-10, 10, -10, 10], origin='lower', cmap='viridis')
-axs[0].set_title(f"{title} - Heatmap", fontsize=18)
-axs[0].set_xlabel('X axis', fontsize=14)
-axs[0].set_ylabel('Y axis', fontsize=14)
-plt.colorbar(im, ax=axs[0])
+sources_5 = [(radius * np.cos(a), radius * np.sin(a)) for a in angles]
 
-# 3D Surface
-ax = fig.add_subplot(1, 2, 2, projection='3d')
-ax.plot_surface(X, Y, Z, cmap='viridis', edgecolor='none')
-ax.set_title(f"{title} - 3D Surface", fontsize=18)
-ax.set_xlabel('X axis', fontsize=14)
-ax.set_ylabel('Y axis', fontsize=14)
-ax.set_zlabel('Amplitude', fontsize=14)
+# ------------------------
+# Plotting Function
+# ------------------------
+def plot_wave(Z, title):
+    fig, axs = plt.subplots(1, 2, figsize=(18, 8))  # BIGGER SIZE
 
-plt.tight_layout()
-plt.show()
-</code></pre>
-<h1 id="-_4">------------------------</h1>
-<h1 id="calculate-and-plot-all">Calculate and plot all</h1>
-<h1 id="-_5">------------------------</h1>
-<p>Z1 = multiple_waves(X, Y, sources_1)
+    # Heatmap
+    im = axs[0].imshow(Z, extent=[-10, 10, -10, 10], origin='lower', cmap='viridis')
+    axs[0].set_title(f"{title} - Heatmap", fontsize=18)
+    axs[0].set_xlabel('X axis', fontsize=14)
+    axs[0].set_ylabel('Y axis', fontsize=14)
+    plt.colorbar(im, ax=axs[0])
+
+    # 3D Surface
+    ax = fig.add_subplot(1, 2, 2, projection='3d')
+    ax.plot_surface(X, Y, Z, cmap='viridis', edgecolor='none')
+    ax.set_title(f"{title} - 3D Surface", fontsize=18)
+    ax.set_xlabel('X axis', fontsize=14)
+    ax.set_ylabel('Y axis', fontsize=14)
+    ax.set_zlabel('Amplitude', fontsize=14)
+
+    plt.tight_layout()
+    plt.show()
+
+# ------------------------
+# Calculate and plot all
+# ------------------------
+Z1 = multiple_waves(X, Y, sources_1)
 Z4 = multiple_waves(X, Y, sources_4)
-Z5 = multiple_waves(X, Y, sources_5)</p>
-<p>plot_wave(Z1, "Single Source")
+Z5 = multiple_waves(X, Y, sources_5)
+
+plot_wave(Z1, "Single Source")
 plot_wave(Z4, "Four Sources (Square)")
-plot_wave(Z5, "Five Sources (Pentagon)")</p>
-<pre><code>
+plot_wave(Z5, "Five Sources (Pentagon)")
+````
+
 ### GIF Code 
 
 ![alt text](interference_5_sources-1.gif)
+
 
 ```python
 import numpy as np
