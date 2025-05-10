@@ -214,6 +214,7 @@ plot_wave(Z5, "Five Sources (Pentagon)")
 
 ![alt text](interference_5_sources-1.gif)
 
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -279,5 +280,5 @@ for i in range(num_frames):
 imageio.mimsave('interference_5_sources.gif', gif_frames, duration=0.1)
 
 print("GIF saved as 'interference_5_sources.gif'")
-````
+```
 
