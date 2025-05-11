@@ -35,6 +35,7 @@ If two resistors, $R_1$ and $R_2$, are in parallel:
   R_{eq} = \left( \frac{1}{R_1} + \frac{1}{R_2} \right)^{-1}
   $$
 
+
 These formulas extend to arbitrary numbers of resistors in series or parallel.
 
 ---
