@@ -133,6 +133,7 @@ The next step is to implement and analyze these interference patterns computatio
 ![alt text](image-5.png)
 ![alt text](image-6.png)
 ![alt text](image-7.png)
+![alt text](interference_5_sources-1-1.gif)
 
 ```python
 import numpy as np
