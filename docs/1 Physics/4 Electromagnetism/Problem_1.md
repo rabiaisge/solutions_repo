@@ -62,10 +62,9 @@ We simulate particle trajectories using the 4th-order Runge-Kutta method for acc
 
 See the attached Python script for full implementation: RK4 integration, Lorentz force application, and 3D visualization.
 
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
 
 
 ```python
@@ -130,7 +129,7 @@ def plot_trajectory(positions, title="Trajectory"):
 # Simulation Setup
 # =============================
 q = 1.0         # Charge in Coulombs
-m = 1e-3        # Mass in kg (1 gram)
+m = 1.001       # Mass in kg (1 gram)
 v0 = np.array([1e5, 0.0, 0.0])  # Initial velocity in m/s
 r0 = np.array([0.0, 0.0, 0.0])  # Initial position
 dt = 1e-6       # Time step (s)
