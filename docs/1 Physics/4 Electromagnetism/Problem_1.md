@@ -69,17 +69,17 @@ See the attached Python script for full implementation: RK4 integration, Lorentz
 
 
 ```python
-# Lorentz Force Simulation and Visualization
+# Lorentz Force Simulation for a Macroscopic Body (1g, 1C)
 
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-# Constants and Parameters
+# Lorentz force
 def lorentz_force(q, v, E, B):
     return q * (E + np.cross(v, B))
 
-# Runge-Kutta 4th order integrator
+# 4th-order Runge-Kutta
 def rk4_step(pos, vel, dt, q, m, E, B):
     def acceleration(v):
         return lorentz_force(q, v, E, B) / m
@@ -96,13 +96,13 @@ def rk4_step(pos, vel, dt, q, m, E, B):
     k4v = dt * acceleration(vel + k3v)
     k4x = dt * (vel + k3v)
 
-    new_vel = vel + (k1v + 2*k2v + 2*k3v + k4v)/6
-    new_pos = pos + (k1x + 2*k2x + 2*k3x + k4x)/6
+    new_vel = vel + (k1v + 2*k2v + 2*k3v + k4v) / 6
+    new_pos = pos + (k1x + 2*k2x + 2*k3x + k4x) / 6
 
     return new_pos, new_vel
 
 # Simulation function
-def simulate_motion(E, B, q, m, v0, r0, dt=1e-9, steps=1000):
+def simulate_motion(E, B, q, m, v0, r0, dt=1e-6, steps=5000):
     positions = [r0]
     velocities = [v0]
     pos, vel = r0, v0
@@ -114,40 +114,51 @@ def simulate_motion(E, B, q, m, v0, r0, dt=1e-9, steps=1000):
 
     return np.array(positions), np.array(velocities)
 
-# Visualization function
-def plot_trajectory(positions, title="Particle Trajectory"):
-    fig = plt.figure()
+# 3D Plotting
+def plot_trajectory(positions, title="Trajectory"):
+    fig = plt.figure(figsize=(8, 6))
     ax = fig.add_subplot(111, projection='3d')
-    ax.plot3D(positions[:,0], positions[:,1], positions[:,2])
+    ax.plot3D(positions[:, 0], positions[:, 1], positions[:, 2])
     ax.set_title(title)
     ax.set_xlabel('x (m)')
     ax.set_ylabel('y (m)')
     ax.set_zlabel('z (m)')
+    plt.tight_layout()
     plt.show()
 
-# Example scenarios
-q = 1.6e-19  # Charge (C)
-m = 9.11e-31 # Mass (kg)
-v0 = np.array([1e6, 0, 0])
-r0 = np.array([0, 0, 0])
+# =============================
+# Simulation Setup
+# =============================
+q = 1.0         # Charge in Coulombs
+m = 1e-3        # Mass in kg (1 gram)
+v0 = np.array([1e5, 0.0, 0.0])  # Initial velocity in m/s
+r0 = np.array([0.0, 0.0, 0.0])  # Initial position
+dt = 1e-6       # Time step (s)
+steps = 5000    # Number of steps
 
-# Uniform magnetic field only
-E1 = np.array([0, 0, 0])
-B1 = np.array([0, 0, 1])
-pos1, vel1 = simulate_motion(E1, B1, q, m, v0, r0)
-plot_trajectory(pos1, title="Circular Motion in Magnetic Field")
+# =============================
+# Scenario 1: Circular motion (B only)
+# =============================
+E1 = np.array([0.0, 0.0, 0.0])       # No electric field
+B1 = np.array([0.0, 0.0, 10.0])      # 10 Tesla magnetic field
+pos1, _ = simulate_motion(E1, B1, q, m, v0, r0, dt, steps)
+plot_trajectory(pos1, title="Circular Motion in B Field")
 
-# Electric and magnetic fields parallel
-E2 = np.array([0, 0, 1e5])
-B2 = np.array([0, 0, 1])
-pos2, vel2 = simulate_motion(E2, B2, q, m, v0, r0)
-plot_trajectory(pos2, title="Helical Motion in E & B Fields")
+# =============================
+# Scenario 2: Helical motion (E and B parallel)
+# =============================
+E2 = np.array([0.0, 0.0, 1e5])       # Electric field along z
+B2 = np.array([0.0, 0.0, 10.0])      # Magnetic field along z
+pos2, _ = simulate_motion(E2, B2, q, m, v0, r0, dt, steps)
+plot_trajectory(pos2, title="Helical Motion in E || B")
 
-# Crossed electric and magnetic fields
-E3 = np.array([0, 1e5, 0])
-B3 = np.array([0, 0, 1])
-pos3, vel3 = simulate_motion(E3, B3, q, m, v0, r0)
-plot_trajectory(pos3, title="Drift Motion in Crossed E & B Fields")
+# =============================
+# Scenario 3: Drift (E ⊥ B)
+# =============================
+E3 = np.array([0.0, 1e5, 0.0])       # Electric field along y
+B3 = np.array([0.0, 0.0, 10.0])      # Magnetic field along z
+pos3, _ = simulate_motion(E3, B3, q, m, v0, r0, dt, steps)
+plot_trajectory(pos3, title="Drift Motion in E ⊥ B")
 ```
 ---
 
