@@ -172,6 +172,96 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<h1 id="part-1-estimating-using-a-circle">✅ PART 1: Estimating π Using a Circle</h1>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
+<h3 id="geometric-intuition-behind-estimating">🔹 Geometric Intuition Behind Estimating π</h3>
+<p>Monte Carlo simulation allows us to estimate π by randomly sampling points in a known geometric space. Here's the basic idea:</p>
+<ul>
+<li>Imagine a <strong>unit circle</strong> (radius <span class="arithmatex">\(r=1\)</span>) centered at the origin.</li>
+<li>This circle fits <strong>perfectly</strong> inside a square with side length 2, extending from <span class="arithmatex">\(-1\)</span> to <span class="arithmatex">\(1\)</span> on both axes.</li>
+<li>The <strong>area of the circle</strong> is:
+  $$
+  A_{\text{circle}} = \pi r^2 = \pi (1)^2 = \pi
+  $$</li>
+<li>The <strong>area of the square</strong> is:
+  $$
+  A_{\text{square}} = (2r)^2 = (2)^2 = 4
+  $$</li>
+<li>The <strong>ratio of the areas</strong> is:
+  $$
+  \frac{A_{\text{circle}}}{A_{\text{square}}} = \frac{\pi}{4}
+  $$</li>
+</ul>
+<h3 id="using-random-points-to-estimate">🔹 Using Random Points to Estimate π</h3>
+<p>We generate random points <span class="arithmatex">\((x, y)\)</span> uniformly in the square <span class="arithmatex">\([-1, 1] \times [-1, 1]\)</span>.</p>
+<ul>
+<li>A point lies <strong>inside the unit circle</strong> if:
+  $$
+  x^2 + y^2 \leq 1
+  $$</li>
+<li>Let:</li>
+<li><span class="arithmatex">\(N\)</span>: total number of points generated  </li>
+<li>
+<p><span class="arithmatex">\(N_{\text{circle}}\)</span>: number of points inside the circle</p>
+</li>
+<li>
+<p>The ratio:
+  $$
+  \frac{N_{\text{circle}}}{N} \approx \frac{\text{Area of Circle}}{\text{Area of Square}} = \frac{\pi}{4}
+  $$</p>
+</li>
+</ul>
+<h3 id="final-formula-to-estimate">🔹 Final Formula to Estimate π</h3>
+<p>Rearranging the above equation:
+$$
+\frac{N_{\text{circle}}}{N} \approx \frac{\pi}{4} \quad \Rightarrow \quad \pi \approx 4 \cdot \frac{N_{\text{circle}}}{N}
+$$</p>
+<h3 id="summary">✅ Summary</h3>
+<ul>
+<li>By sampling random points in a square and counting how many fall inside the inscribed circle, we can estimate π.</li>
+<li>The more points we use, the better the approximation (due to the Law of Large Numbers).</li>
+</ul>
+<h1 id="part-1-simulation-estimating-using-a-unit-circle">🧪 PART 1: Simulation – Estimating π Using a Unit Circle</h1>
+<p>This section simulates the Monte Carlo method to estimate π.</p>
+<p>We will:</p>
+<ul>
+<li>Generate random points in a square bounding the unit circle.</li>
+<li>Count how many points fall inside the circle.</li>
+<li>Estimate π using the formula:</li>
+</ul>
+<div class="arithmatex">\[
+\pi \approx 4 \cdot \frac{N_{\text{circle}}}{N}
+\]</div>
+<h1 id="part-1-simulation-estimating-using-a-unit-circle_1">🧪 PART 1: Simulation – Estimating π Using a Unit Circle</h1>
+<p>This section simulates the Monte Carlo method to estimate π.</p>
+<p>We will:</p>
+<ul>
+<li>Generate random points in a square bounding the unit circle.</li>
+<li>Count how many points fall inside the circle.</li>
+<li>Estimate π using the formula:</li>
+</ul>
+<div class="arithmatex">\[
+\pi \approx 4 \cdot \frac{N_{\text{circle}}}{N}
+\]</div>
+<h2 id="visualization">🟢 Visualization</h2>
+<p>We now plot the points:
+- <strong>Green</strong>: inside the circle<br/>
+- <strong>Red</strong>: outside the circle</p>
+<p><img alt="alt text" src="../image-5.png"/>
+```python</p>
+<h1 id="plotting">Plotting</h1>
+<p>plt.figure(figsize=(6, 6))
+plt.scatter(x[inside_circle], y[inside_circle], color='green', s=1, label='Inside Circle')
+plt.scatter(x[~inside_circle], y[~inside_circle], color='red', s=1, label='Outside Circle')
+plt.gca().set_aspect('equal')
+plt.title(f"Monte Carlo π Estimate: {pi_estimate:.6f}")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.legend()
+plt.grid(True)
+plt.show()
+````
+<img alt="alt text" src="../image-6.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
