@@ -240,13 +240,10 @@ exponential_pop = np.random.exponential(scale=1.0, size=N)
 # --- Binomial Distribution ---
 # Parameters: n = 10, p = 0.5
 binomial_pop = np.random.binomial(n=10, p=0.5, size=N)
-````
-### pythone code / Visual 
-
-![alt text](image.png)
-
-```python
-# 🧪 Step 1: Setting Up Population Distributions
+</code></pre>
+<h3 id="pythone-code-visual">pythone code / Visual</h3>
+<p><img alt="alt text" src="../image.png"/></p>
+<pre><code class="language-python"># 🧪 Step 1: Setting Up Population Distributions
 
 # ✅ Required Libraries
 import numpy as np
@@ -296,7 +293,8 @@ axs[2].set_ylabel('Density')
 plt.suptitle("Population Distributions for CLT Simulation", fontsize=16)
 plt.tight_layout()
 plt.show()
-````
+ ```
+
 
 # 🧮 Step 2: Simulating Sampling Distributions
 
@@ -405,141 +403,27 @@ Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}}
 <hr/>
 <h2 id="python-implementation-for-visualization">🐍 Python Implementation for Visualization</h2>
 <p><img alt="alt text" src="../image-3.png"/></p>
-<p>```python
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns</p>
-<p>sns.set(style="whitegrid")
-np.random.seed(42)</p>
-<h1 id="population-size">Population size</h1>
-<p>N = 100_000</p>
-<h1 id="generate-populations">Generate populations</h1>
-<p>populations = {
-    "Uniform[0,1]": np.random.uniform(0, 1, N),
-    "Exponential(λ=1)": np.random.exponential(1, N),
-    "Binomial(n=10, p=0.5)": np.random.binomial(n=10, p=0.5, size=N),
-}</p>
-<p>sample_sizes = [5, 10, 30, 50]
-num_samples = 1000</p>
-<p>fig, axes = plt.subplots(len(populations), len(sample_sizes), figsize=(20, 12), sharex='col', sharey='row')</p>
-<p>for row_idx, (dist_name, population) in enumerate(populations.items()):
-    for col_idx, n in enumerate(sample_sizes):
-        sample_means = []
-        for _ in range(num_samples):
-            sample = np.random.choice(population, size=n, replace=False)
-            sample_means.append(np.mean(sample))</p>
-<pre><code>    ax = axes[row_idx, col_idx]
-    sns.histplot(sample_means, bins=30, kde=True, color='steelblue', ax=ax)
-    ax.set_title(f"{dist_name}\nSample Size $n={n}$")
-    if col_idx == 0:
-        ax.set_ylabel('Frequency')
-    if row_idx == len(populations)-1:
-        ax.set_xlabel('Sample Mean')
-</code></pre>
-<p>plt.suptitle("Sampling Distributions of Sample Means Across Populations and Sample Sizes", fontsize=18)
-plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-plt.show()</p>
-<pre><code># 🔍 Step 4: Exploring Parameters Affecting the Central Limit Theorem
-
-## 🎯 Objectives
-
-- Analyze how the **shape of the original population distribution** influences the rate of convergence to normality.
-- Investigate the impact of **sample size $n$** on the approximation to a normal distribution.
-- Examine the role of **population variance $\sigma^2$** on the spread of the sampling distribution of the mean.
-
----
-
-## 1. Effect of Population Distribution Shape
-
-- The CLT guarantees convergence to normality, but the **speed of convergence depends on the shape** of the population distribution.
-- Distributions with **high skewness** or **heavy tails** (e.g., Exponential, Cauchy) require larger sample sizes for the sample mean to approximate normality.
-- For symmetric and light-tailed distributions (e.g., Uniform, Binomial), convergence is generally faster.
-
----
-
-## 2. Influence of Sample Size $n$
-
-- The sampling distribution of the mean $\bar{X}$ for sample size $n$ has:
-
-  $$
-  \text{Mean}(\bar{X}) = \mu
-  $$
-
-  $$
-  \text{Variance}(\bar{X}) = \frac{\sigma^2}{n}
-  $$
-
-- As $n$ increases:
-
-  - Variance of $\bar{X}$ decreases, so the sampling distribution becomes more **concentrated** around $\mu$.
-  - By the CLT, the distribution of $\bar{X}$ approaches the normal distribution:
-
-  $$
-  \bar{X} \xrightarrow{d} N\left(\mu, \frac{\sigma^2}{n}\right)
-  $$
-
-- Visualizing different $n$ values helps to **observe this concentration and shape change**.
-
----
-
-## 3. Impact of Population Variance $\sigma^2$
-
-- The **spread** of the sampling distribution depends on the population variance $\sigma^2$.
-- Higher $\sigma^2$ leads to more **variation in sample means**.
-- This is why knowing or estimating $\sigma^2$ is important in inferential statistics.
-
----
-
-## 📊 Summary of Relationships
-
-- Population shape, sample size, and variance collectively determine how quickly and tightly the sampling distribution of the mean converges to normality.
-
-- Key equation summarizing the CLT:
-
-  $$
-  Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \xrightarrow{d} N(0,1)
-  $$
-
----
-
-## 🐍 Next: Python Code to Experiment with These Parameters
-
-- Simulate sampling distributions with varying:
-
-  - Population shapes (e.g., Uniform, Exponential, Binomial)
-  - Sample sizes ($n = 5, 10, 30, 50$)
-  - Variances (e.g., by scaling distributions)
-
-- Visualize the effects to deepen understanding of the CLT in action.
-
----
-
-![alt text](image-4.png)
-```python
-import numpy as np
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 sns.set(style="whitegrid")
 np.random.seed(42)
 
-# Population size for each distribution
+# Population size
 N = 100_000
 
-# Define original populations with different shapes and variances
+# Generate populations
 populations = {
-    "Uniform[0,1]": np.random.uniform(0, 1, N),                        # Variance = 1/12 ~0.083
-    "Exponential(λ=1)": np.random.exponential(1, N),                  # Variance = 1
-    "Binomial(n=10, p=0.5)": np.random.binomial(n=10, p=0.5, size=N), # Variance = np(1-p) = 2.5
+    "Uniform[0,1]": np.random.uniform(0, 1, N),
+    "Exponential(λ=1)": np.random.exponential(1, N),
+    "Binomial(n=10, p=0.5)": np.random.binomial(n=10, p=0.5, size=N),
 }
 
-# Scale exponential to higher variance for demonstration
-populations["Scaled Exponential (×3)"] = populations["Exponential(λ=1)"] * 3  # Variance ~9
-
 sample_sizes = [5, 10, 30, 50]
-num_samples = 1000  # Number of samples per sample size
+num_samples = 1000
 
-fig, axes = plt.subplots(len(populations), len(sample_sizes), figsize=(22, 14), sharex='col', sharey='row')
+fig, axes = plt.subplots(len(populations), len(sample_sizes), figsize=(20, 12), sharex='col', sharey='row')
 
 for row_idx, (dist_name, population) in enumerate(populations.items()):
     for col_idx, n in enumerate(sample_sizes):
@@ -547,18 +431,134 @@ for row_idx, (dist_name, population) in enumerate(populations.items()):
         for _ in range(num_samples):
             sample = np.random.choice(population, size=n, replace=False)
             sample_means.append(np.mean(sample))
+
         ax = axes[row_idx, col_idx]
-        sns.histplot(sample_means, bins=30, kde=True, color='mediumseagreen', ax=ax)
+        sns.histplot(sample_means, bins=30, kde=True, color='steelblue', ax=ax)
         ax.set_title(f"{dist_name}\nSample Size $n={n}$")
         if col_idx == 0:
             ax.set_ylabel('Frequency')
-        if row_idx == len(populations) - 1:
+        if row_idx == len(populations)-1:
             ax.set_xlabel('Sample Mean')
 
-plt.suptitle("Exploring Effects of Population Shape, Sample Size, and Variance on Sampling Distribution", fontsize=18)
+plt.suptitle("Sampling Distributions of Sample Means Across Populations and Sample Sizes", fontsize=18)
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 plt.show()
 </code></pre>
+<h1 id="step-4-exploring-parameters-affecting-the-central-limit-theorem">🔍 Step 4: Exploring Parameters Affecting the Central Limit Theorem</h1>
+<h2 id="objectives">🎯 Objectives</h2>
+<ul>
+<li>Analyze how the <strong>shape of the original population distribution</strong> influences the rate of convergence to normality.</li>
+<li>Investigate the impact of <strong>sample size <span class="arithmatex">\(n\)</span></strong> on the approximation to a normal distribution.</li>
+<li>Examine the role of <strong>population variance <span class="arithmatex">\(\sigma^2\)</span></strong> on the spread of the sampling distribution of the mean.</li>
+</ul>
+<hr/>
+<h2 id="1-effect-of-population-distribution-shape">1. Effect of Population Distribution Shape</h2>
+<ul>
+<li>The CLT guarantees convergence to normality, but the <strong>speed of convergence depends on the shape</strong> of the population distribution.</li>
+<li>Distributions with <strong>high skewness</strong> or <strong>heavy tails</strong> (e.g., Exponential, Cauchy) require larger sample sizes for the sample mean to approximate normality.</li>
+<li>For symmetric and light-tailed distributions (e.g., Uniform, Binomial), convergence is generally faster.</li>
+</ul>
+<hr/>
+<h2 id="2-influence-of-sample-size-n">2. Influence of Sample Size <span class="arithmatex">\(n\)</span></h2>
+<ul>
+<li>The sampling distribution of the mean <span class="arithmatex">\(\bar{X}\)</span> for sample size <span class="arithmatex">\(n\)</span> has:</li>
+</ul>
+<p>$$
+  \text{Mean}(\bar{X}) = \mu
+  $$</p>
+<p>$$
+  \text{Variance}(\bar{X}) = \frac{\sigma^2}{n}
+  $$</p>
+<ul>
+<li>
+<p>As <span class="arithmatex">\(n\)</span> increases:</p>
+</li>
+<li>
+<p>Variance of <span class="arithmatex">\(\bar{X}\)</span> decreases, so the sampling distribution becomes more <strong>concentrated</strong> around <span class="arithmatex">\(\mu\)</span>.</p>
+</li>
+<li>By the CLT, the distribution of <span class="arithmatex">\(\bar{X}\)</span> approaches the normal distribution:</li>
+</ul>
+<p>$$
+  \bar{X} \xrightarrow{d} N\left(\mu, \frac{\sigma^2}{n}\right)
+  $$</p>
+<ul>
+<li>Visualizing different <span class="arithmatex">\(n\)</span> values helps to <strong>observe this concentration and shape change</strong>.</li>
+</ul>
+<hr/>
+<h2 id="3-impact-of-population-variance-sigma2">3. Impact of Population Variance <span class="arithmatex">\(\sigma^2\)</span></h2>
+<ul>
+<li>The <strong>spread</strong> of the sampling distribution depends on the population variance <span class="arithmatex">\(\sigma^2\)</span>.</li>
+<li>Higher <span class="arithmatex">\(\sigma^2\)</span> leads to more <strong>variation in sample means</strong>.</li>
+<li>This is why knowing or estimating <span class="arithmatex">\(\sigma^2\)</span> is important in inferential statistics.</li>
+</ul>
+<hr/>
+<h2 id="summary-of-relationships">📊 Summary of Relationships</h2>
+<ul>
+<li>
+<p>Population shape, sample size, and variance collectively determine how quickly and tightly the sampling distribution of the mean converges to normality.</p>
+</li>
+<li>
+<p>Key equation summarizing the CLT:</p>
+</li>
+</ul>
+<p>$$
+  Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \xrightarrow{d} N(0,1)
+  $$</p>
+<hr/>
+<h2 id="next-python-code-to-experiment-with-these-parameters">🐍 Next: Python Code to Experiment with These Parameters</h2>
+<ul>
+<li>
+<p>Simulate sampling distributions with varying:</p>
+</li>
+<li>
+<p>Population shapes (e.g., Uniform, Exponential, Binomial)</p>
+</li>
+<li>Sample sizes (<span class="arithmatex">\(n = 5, 10, 30, 50\)</span>)</li>
+<li>
+<p>Variances (e.g., by scaling distributions)</p>
+</li>
+<li>
+<p>Visualize the effects to deepen understanding of the CLT in action.</p>
+</li>
+</ul>
+<hr/>
+<p><img alt="alt text" src="../image-4.png"/>
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns</p>
+<p>sns.set(style="whitegrid")
+np.random.seed(42)</p>
+<h1 id="population-size-for-each-distribution">Population size for each distribution</h1>
+<p>N = 100_000</p>
+<h1 id="define-original-populations-with-different-shapes-and-variances">Define original populations with different shapes and variances</h1>
+<p>populations = {
+    "Uniform[0,1]": np.random.uniform(0, 1, N),                        # Variance = 1/12 ~0.083
+    "Exponential(λ=1)": np.random.exponential(1, N),                  # Variance = 1
+    "Binomial(n=10, p=0.5)": np.random.binomial(n=10, p=0.5, size=N), # Variance = np(1-p) = 2.5
+}</p>
+<h1 id="scale-exponential-to-higher-variance-for-demonstration">Scale exponential to higher variance for demonstration</h1>
+<p>populations["Scaled Exponential (×3)"] = populations["Exponential(λ=1)"] * 3  # Variance ~9</p>
+<p>sample_sizes = [5, 10, 30, 50]
+num_samples = 1000  # Number of samples per sample size</p>
+<p>fig, axes = plt.subplots(len(populations), len(sample_sizes), figsize=(22, 14), sharex='col', sharey='row')</p>
+<p>for row_idx, (dist_name, population) in enumerate(populations.items()):
+    for col_idx, n in enumerate(sample_sizes):
+        sample_means = []
+        for _ in range(num_samples):
+            sample = np.random.choice(population, size=n, replace=False)
+            sample_means.append(np.mean(sample))
+        ax = axes[row_idx, col_idx]
+        sns.histplot(sample_means, bins=30, kde=True, color='mediumseagreen', ax=ax)
+        ax.set_title(f"{dist_name}\nSample Size <span class="arithmatex">\(n={n}\)</span>")
+        if col_idx == 0:
+            ax.set_ylabel('Frequency')
+        if row_idx == len(populations) - 1:
+            ax.set_xlabel('Sample Mean')</p>
+<p>plt.suptitle("Exploring Effects of Population Shape, Sample Size, and Variance on Sampling Distribution", fontsize=18)
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+plt.show()
+ ```</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
