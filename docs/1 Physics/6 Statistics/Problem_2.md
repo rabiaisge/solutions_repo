@@ -105,7 +105,9 @@ ax.set_ylim(-1, 1)
 ax.legend(loc='upper right')
 plt.grid(True)
 plt.show()
-````
+ ```
+ ---
+
 ## 🖥 2. Simulation
 
 In this section, we implement a Monte Carlo simulation to estimate the value of π by randomly generating points in a square and analyzing how many fall within an inscribed circle.
@@ -153,10 +155,13 @@ In this section, we implement a Monte Carlo simulation to estimate the value of 
 - This approach is simple but powerful and visually intuitive.
 
 > ✅ This method demonstrates how probabilistic simulations can approximate deterministic mathematical constants using geometry.
+---
+
 
 ### 3 Visualization
 
 The following Python code generates a scatter plot distinguishing points inside and outside the unit circle.
+
 
 ![alt text](indir2.gif)
 
@@ -202,12 +207,16 @@ plt.grid(True)
 plt.show()
 
 print(f"Estimated π: {pi_estimate}")
-````
+ ```
+ ---
+
 ### 4 Analysis
 
 To study convergence, we compute the absolute error \( |\pi_{\text{estimate}} - \pi| \) for increasing \( N \).
+
 ![alt text](image-8.png)
-```python 
+
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -240,7 +249,9 @@ plt.grid(True, which='both')
 plt.legend()
 plt.tight_layout()
 plt.show()
-````
+ ```
+
+
 # ✅ PART 2: Estimating π Using Buffon’s Needle
 
 ## 📘 1. Theoretical Foundation
@@ -428,10 +439,14 @@ print(f"Estimated π after {N} throws: {pi_estimate:.6f}")
 
 # Visualize a smaller sample for clarity
 plot_buffon_needles(x_centers[:200], angles[:200], crossings[:200], L, d)
-````
+```
+
 ![alt text](image-9.png)
 
+---
+
 ### 3 Visualization
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -479,8 +494,10 @@ plt.ylim(-L, L)
 plt.xlim(0, max_x)
 plt.grid(True)
 plt.show()
-````
+ ```
+
 ![alt text](image-10.png)
+
 ## 4. Analysis
 
 We analyze the convergence behavior of the Buffon’s Needle simulation and compare it with the circle-based Monte Carlo method for estimating π.
@@ -572,7 +589,8 @@ plt.title("Error Convergence of π Estimation Methods")
 plt.legend()
 plt.grid(True, which="both")
 plt.show()
-```
+ ```
+ 
 ![alt text](image-11.png)
 ![alt text](image-12.png)
 
