@@ -79,7 +79,8 @@ exponential_pop = np.random.exponential(scale=1.0, size=N)
 # --- Binomial Distribution ---
 # Parameters: n = 10, p = 0.5
 binomial_pop = np.random.binomial(n=10, p=0.5, size=N)
-````
+```
+
 ### pythone code / Visual 
 
 ![alt text](image.png)
@@ -135,7 +136,8 @@ axs[2].set_ylabel('Density')
 plt.suptitle("Population Distributions for CLT Simulation", fontsize=16)
 plt.tight_layout()
 plt.show()
-````
+ ```
+
 
 # 🧮 Step 2: Simulating Sampling Distributions
 
@@ -294,7 +296,7 @@ for row_idx, (dist_name, population) in enumerate(populations.items()):
 plt.suptitle("Sampling Distributions of Sample Means Across Populations and Sample Sizes", fontsize=18)
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 plt.show()
-````
+```
 # 🔍 Step 4: Exploring Parameters Affecting the Central Limit Theorem
 
 ## 🎯 Objectives
@@ -414,5 +416,5 @@ for row_idx, (dist_name, population) in enumerate(populations.items()):
 plt.suptitle("Exploring Effects of Population Shape, Sample Size, and Variance on Sampling Distribution", fontsize=18)
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 plt.show()
-````
+ ```
 
