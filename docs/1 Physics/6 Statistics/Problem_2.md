@@ -105,10 +105,10 @@ ax.set_ylim(-1, 1)
 ax.legend(loc='upper right')
 plt.grid(True)
 plt.show()
- ```
- ---
+```
+---
 
-## 🖥 2. Simulation
+### 🖥 2. Simulation
 
 In this section, we implement a Monte Carlo simulation to estimate the value of π by randomly generating points in a square and analyzing how many fall within an inscribed circle.
 
