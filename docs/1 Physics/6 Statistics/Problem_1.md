@@ -373,6 +373,7 @@ plt.show()
 ---
 
 ![alt text](image-4.png)
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -417,4 +418,6 @@ plt.suptitle("Exploring Effects of Population Shape, Sample Size, and Variance o
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 plt.show()
  ```
+
+
 
