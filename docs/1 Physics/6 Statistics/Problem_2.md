@@ -207,7 +207,8 @@ plt.grid(True)
 plt.show()
 
 print(f"Estimated π: {pi_estimate}")
- ```
+
+```
  ---
 
 ### 4 Analysis
@@ -249,8 +250,10 @@ plt.grid(True, which='both')
 plt.legend()
 plt.tight_layout()
 plt.show()
+
 ```
 ---
+
 
 # ✅ PART 2: Estimating π Using Buffon’s Needle
 
