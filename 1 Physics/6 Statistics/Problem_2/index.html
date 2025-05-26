@@ -400,116 +400,86 @@ plt.grid(True, which='both')
 plt.legend()
 plt.tight_layout()
 plt.show()
- ```
-
-
-# ✅ PART 2: Estimating π Using Buffon’s Needle
-
-## 📘 1. Theoretical Foundation
-
-### 🧠 Introduction to Buffon’s Needle Problem
-
-Buffon’s Needle is a classic probability problem that provides a method to estimate π using random trials involving dropping a needle on a plane ruled with parallel lines. The problem explores the probability that a needle of length $L$ dropped randomly onto a floor marked with parallel lines spaced $d$ units apart will cross one of these lines.
-
----
-
-### 🔍 Problem Setup and Assumptions
-
-- The plane has **parallel lines** spaced at distance $d$ apart.
-- A needle of length $L$ is randomly thrown onto the plane.
-- The needle’s position is characterized by:
-  - The distance $x$ from the needle’s center to the nearest line (with $0 \leq x \leq \frac{d}{2}$).
-  - The angle $\theta$ between the needle and the parallel lines, where $\theta$ is uniformly distributed in $[0, \frac{\pi}{2}]$ due to symmetry.
-
----
-
-### 📐 Condition for Needle Crossing a Line
-
-The needle crosses a line if the distance from the center to the closest line is less than or equal to half the projected length of the needle on the axis perpendicular to the lines:
-
-$$
+</code></pre>
+<h1 id="part-2-estimating-using-buffons-needle">✅ PART 2: Estimating π Using Buffon’s Needle</h1>
+<h2 id="1-theoretical-foundation_1">📘 1. Theoretical Foundation</h2>
+<h3 id="introduction-to-buffons-needle-problem">🧠 Introduction to Buffon’s Needle Problem</h3>
+<p>Buffon’s Needle is a classic probability problem that provides a method to estimate π using random trials involving dropping a needle on a plane ruled with parallel lines. The problem explores the probability that a needle of length <span class="arithmatex">\(L\)</span> dropped randomly onto a floor marked with parallel lines spaced <span class="arithmatex">\(d\)</span> units apart will cross one of these lines.</p>
+<hr/>
+<h3 id="problem-setup-and-assumptions">🔍 Problem Setup and Assumptions</h3>
+<ul>
+<li>The plane has <strong>parallel lines</strong> spaced at distance <span class="arithmatex">\(d\)</span> apart.</li>
+<li>A needle of length <span class="arithmatex">\(L\)</span> is randomly thrown onto the plane.</li>
+<li>The needle’s position is characterized by:</li>
+<li>The distance <span class="arithmatex">\(x\)</span> from the needle’s center to the nearest line (with <span class="arithmatex">\(0 \leq x \leq \frac{d}{2}\)</span>).</li>
+<li>The angle <span class="arithmatex">\(\theta\)</span> between the needle and the parallel lines, where <span class="arithmatex">\(\theta\)</span> is uniformly distributed in <span class="arithmatex">\([0, \frac{\pi}{2}]\)</span> due to symmetry.</li>
+</ul>
+<hr/>
+<h3 id="condition-for-needle-crossing-a-line">📐 Condition for Needle Crossing a Line</h3>
+<p>The needle crosses a line if the distance from the center to the closest line is less than or equal to half the projected length of the needle on the axis perpendicular to the lines:</p>
+<div class="arithmatex">\[
 x \leq \frac{L}{2} \sin \theta
-$$
-
----
-
-### 📊 Probability of Crossing
-
-The probability $P$ that a needle crosses a line is derived by integrating over all possible positions and orientations, yielding:
-
-$$
+\]</div>
+<hr/>
+<h3 id="probability-of-crossing">📊 Probability of Crossing</h3>
+<p>The probability <span class="arithmatex">\(P\)</span> that a needle crosses a line is derived by integrating over all possible positions and orientations, yielding:</p>
+<div class="arithmatex">\[
 P = \frac{2L}{\pi d}
-$$
-
-*This formula assumes $L \leq d$.*
-
----
-
-### 🔢 Derivation of the π Estimation Formula
-
-Let:
-
-- $L$ = length of the needle  
-- $d$ = distance between the parallel lines  
-- $N$ = total number of needle throws  
-- $C$ = number of times the needle crosses a line  
-
-From the observed experimental probability,
-
-$$
+\]</div>
+<p><em>This formula assumes <span class="arithmatex">\(L \leq d\)</span>.</em></p>
+<hr/>
+<h3 id="derivation-of-the-estimation-formula">🔢 Derivation of the π Estimation Formula</h3>
+<p>Let:</p>
+<ul>
+<li><span class="arithmatex">\(L\)</span> = length of the needle  </li>
+<li><span class="arithmatex">\(d\)</span> = distance between the parallel lines  </li>
+<li><span class="arithmatex">\(N\)</span> = total number of needle throws  </li>
+<li><span class="arithmatex">\(C\)</span> = number of times the needle crosses a line  </li>
+</ul>
+<p>From the observed experimental probability,</p>
+<div class="arithmatex">\[
 P \approx \frac{C}{N}
-$$
-
-and equating to the theoretical probability,
-
-$$
+\]</div>
+<p>and equating to the theoretical probability,</p>
+<div class="arithmatex">\[
 \frac{C}{N} \approx \frac{2L}{\pi d}
-$$
-
-Solving for π, we get the estimate:
-
-$$
+\]</div>
+<p>Solving for π, we get the estimate:</p>
+<div class="arithmatex">\[
 \boxed{
 \pi \approx \frac{2 L N}{d C}
 }
-$$
-
----
-
-### ✅ Summary
-
-- Buffon’s Needle problem connects geometry and probability to estimate π.
-- It provides an elegant, physical experiment-based approach to numerical estimation.
-- Accuracy improves as $N$ (number of needle throws) increases.
-- The problem is a foundational example in geometric probability and Monte Carlo methods.
-
-## 2. Simulation
-
-We now implement the simulation of Buffon’s Needle experiment to estimate π.
-
-### Simulation Procedure
-
-- **Step 1:** Simulate $N$ random needle drops on a plane with parallel lines spaced by distance $d$.
-- **Step 2:** For each needle drop:
-  - Sample the needle's center position $x$ uniformly from $[0, d/2]$.
-  - Sample the needle's orientation angle $\theta$ uniformly from $[0, \pi/2]$.
-- **Step 3:** Determine whether the needle crosses a line by checking the condition:
-
-$$
+\]</div>
+<hr/>
+<h3 id="summary_1">✅ Summary</h3>
+<ul>
+<li>Buffon’s Needle problem connects geometry and probability to estimate π.</li>
+<li>It provides an elegant, physical experiment-based approach to numerical estimation.</li>
+<li>Accuracy improves as <span class="arithmatex">\(N\)</span> (number of needle throws) increases.</li>
+<li>The problem is a foundational example in geometric probability and Monte Carlo methods.</li>
+</ul>
+<h2 id="2-simulation_1">2. Simulation</h2>
+<p>We now implement the simulation of Buffon’s Needle experiment to estimate π.</p>
+<h3 id="simulation-procedure">Simulation Procedure</h3>
+<ul>
+<li><strong>Step 1:</strong> Simulate <span class="arithmatex">\(N\)</span> random needle drops on a plane with parallel lines spaced by distance <span class="arithmatex">\(d\)</span>.</li>
+<li><strong>Step 2:</strong> For each needle drop:</li>
+<li>Sample the needle's center position <span class="arithmatex">\(x\)</span> uniformly from <span class="arithmatex">\([0, d/2]\)</span>.</li>
+<li>Sample the needle's orientation angle <span class="arithmatex">\(\theta\)</span> uniformly from <span class="arithmatex">\([0, \pi/2]\)</span>.</li>
+<li><strong>Step 3:</strong> Determine whether the needle crosses a line by checking the condition:</li>
+</ul>
+<div class="arithmatex">\[
 x \leq \frac{L}{2} \sin \theta
-$$
-
-- **Step 4:** Count the number of crossings $C$.
-- **Step 5:** Estimate π using the formula:
-
-$$
+\]</div>
+<ul>
+<li><strong>Step 4:</strong> Count the number of crossings <span class="arithmatex">\(C\)</span>.</li>
+<li><strong>Step 5:</strong> Estimate π using the formula:</li>
+</ul>
+<div class="arithmatex">\[
 \hat{\pi} = \frac{2 L N}{d C}
-$$
-
-### Python Implementation
-
-```python
-import numpy as np
+\]</div>
+<h3 id="python-implementation">Python Implementation</h3>
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 
 def buffon_needle_simulation(L=1.0, d=1.5, N=10000):
