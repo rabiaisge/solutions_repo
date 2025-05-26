@@ -358,17 +358,13 @@ plt.grid(True)
 plt.show()
 
 print(f"Estimated π: {pi_estimate}")
- ```
- ---
 
-### 4 Analysis
-
-To study convergence, we compute the absolute error \( |\pi_{\text{estimate}} - \pi| \) for increasing \( N \).
-
-![alt text](image-8.png)
-
-```python
-import numpy as np
+</code></pre>
+<hr/>
+<h3 id="4-analysis">4 Analysis</h3>
+<p>To study convergence, we compute the absolute error <span class="arithmatex">\( |\pi_{\text{estimate}} - \pi| \)</span> for increasing <span class="arithmatex">\( N \)</span>.</p>
+<p><img alt="alt text" src="../image-8.png"/></p>
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 
 # Monte Carlo yöntemiyle pi tahmini fonksiyonu
@@ -400,6 +396,7 @@ plt.grid(True, which='both')
 plt.legend()
 plt.tight_layout()
 plt.show()
+
 </code></pre>
 <hr/>
 <h1 id="part-2-estimating-using-buffons-needle">✅ PART 2: Estimating π Using Buffon’s Needle</h1>
@@ -613,7 +610,7 @@ plt.grid(True)
 plt.show()
 </code></pre>
 <p><img alt="alt text" src="../image-10.png"/></p>
-<h2 id="4-analysis">4. Analysis</h2>
+<h2 id="4-analysis_1">4. Analysis</h2>
 <p>We analyze the convergence behavior of the Buffon’s Needle simulation and compare it with the circle-based Monte Carlo method for estimating π.</p>
 <hr/>
 <h3 id="objectives">🔍 Objectives</h3>
