@@ -58,53 +58,46 @@ To estimate π using this geometric probability:
 - The larger the number of points $N_{total}$, the more accurate the estimation.
 - This method visually and intuitively links **geometry, probability, and numerical approximation**.
 
-![alt text](image-7.png)
+![alt text](image-13.png)
 
 ```python
-# 🧪 Monte Carlo Estimation of Pi using Circle Method
+
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Number of random points to generate
-N = 10000  # You can increase this for better accuracy
+# Toplam nokta sayısı
+N = 10000
 
-# Generate random (x, y) points in [-1, 1] x [-1, 1]
+# -1 ile 1 arasında rastgele x ve y koordinatları oluştur
 x = np.random.uniform(-1, 1, N)
 y = np.random.uniform(-1, 1, N)
 
-# Check if points fall inside the unit circle (x^2 + y^2 <= 1)
-inside_circle = x**2 + y**2 <= 1
+# Noktaların orijinden uzaklığını hesapla
+distance = x**2 + y**2
 
-# Count how many are inside the circle
-points_inside = np.sum(inside_circle)
+# Daire içinde kalan noktaları belirle
+inside_circle = distance <= 1
 
-# Estimate pi using the Monte Carlo formula
-pi_estimate = 4 * points_inside / N
+# π sayısını tahmin et
+pi_estimate = 4 * np.sum(inside_circle) / N
+print(f"Estimated π = {pi_estimate}")
 
-# Print result
-print(f"Estimated π: {pi_estimate}")
-print(f"Actual π: {np.pi}")
-print(f"Error: {abs(np.pi - pi_estimate)}")
+# Grafik çizimi
+plt.figure(figsize=(6, 6))
+plt.scatter(x[inside_circle], y[inside_circle], color='blue', s=1, label='Inside Circle')
+plt.scatter(x[~inside_circle], y[~inside_circle], color='red', s=1, label='Outside Circle')
 
-# 🎨 Visualization
-fig, ax = plt.subplots(figsize=(6, 6))
-ax.set_aspect('equal')
-ax.set_title('Monte Carlo Estimation of π')
-
-# Plot points
-ax.scatter(x[inside_circle], y[inside_circle], color='blue', s=1, label='Inside Circle')
-ax.scatter(x[~inside_circle], y[~inside_circle], color='red', s=1, label='Outside Circle')
-
-# Draw the unit circle boundary for reference
+# Birim çember çiz
 circle = plt.Circle((0, 0), 1, color='black', fill=False, linewidth=2, label='Unit Circle')
-ax.add_patch(circle)
+plt.gca().add_artist(circle)
 
-# Set limits and labels
-ax.set_xlim(-1, 1)
-ax.set_ylim(-1, 1)
-ax.legend(loc='upper right')
+# Eksen ayarları ve başlık
+plt.axis('equal')
+plt.title(f'Monte Carlo Estimation of π ≈ {pi_estimate:.5f}')
+plt.legend(loc='upper right')
 plt.grid(True)
 plt.show()
+
 ```
 ---
 
@@ -250,7 +243,6 @@ plt.grid(True, which='both')
 plt.legend()
 plt.tight_layout()
 plt.show()
-
 ```
 ---
 
@@ -358,149 +350,62 @@ $$
 \hat{\pi} = \frac{2 L N}{d C}
 $$
 
-### Python Implementation
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-def buffon_needle_simulation(L=1.0, d=1.5, N=10000):
-    """
-    Simulate Buffon's Needle experiment to estimate π.
-    
-    Parameters:
-    - L: length of the needle
-    - d: distance between parallel lines (should be >= L)
-    - N: number of needle drops
-    
-    Returns:
-    - pi_estimate: estimated value of π
-    - crossings: boolean array indicating which needles cross a line
-    - x_centers, angles: arrays of needle center positions and angles
-    """
-    # Random needle centers uniformly in [0, d/2]
-    x_centers = np.random.uniform(0, d/2, N)
-    # Random angles uniformly in [0, π/2]
-    angles = np.random.uniform(0, np.pi/2, N)
-    # Determine crossings using crossing condition
-    crossings = x_centers <= (L/2) * np.sin(angles)
-    # Count crossings
-    C = np.sum(crossings)
-    # Estimate π
-    pi_estimate = (2 * L * N) / (d * C) if C > 0 else np.nan
-    
-    return pi_estimate, crossings, x_centers, angles
-
-def plot_buffon_needles(x_centers, angles, crossings, L=1.0, d=1.5, max_x=None):
-    """
-    Visualize the Buffon's Needle experiment:
-    - Draw parallel lines
-    - Plot needles, highlighting crossings in red
-    
-    Parameters:
-    - x_centers, angles: needle center positions and angles
-    - crossings: boolean array indicating crossing needles
-    - L: needle length
-    - d: distance between lines
-    - max_x: maximum x-axis range for visualization
-    """
-    if max_x is None:
-        max_x = np.max(x_centers) + d
-    
-    plt.figure(figsize=(10, 6))
-    plt.title("Buffon's Needle Simulation Visualization")
-    
-    # Draw parallel lines
-    for i in range(int(np.ceil(max_x / d)) + 1):
-        plt.axvline(i * d, color='black', linestyle='--', linewidth=1)
-    
-    # Plot needles (red for crossing, blue otherwise)
-    for (x, angle, cross) in zip(x_centers, angles, crossings):
-        x_start = x - (L/2) * np.cos(angle)
-        x_end = x + (L/2) * np.cos(angle)
-        y_pos = 0
-        y_start = y_pos - (L/2) * np.sin(angle)
-        y_end = y_pos + (L/2) * np.sin(angle)
-        
-        color = 'red' if cross else 'blue'
-        plt.plot([x_start, x_end], [y_start, y_end], color=color, linewidth=2)
-    
-    plt.xlabel("Horizontal position")
-    plt.ylabel("Needle vertical projection")
-    plt.xlim(0, max_x)
-    plt.ylim(-L, L)
-    plt.grid(True)
-    plt.show()
-
-# Example usage:
-L = 1.0
-d = 1.5
-N = 10000
-
-pi_estimate, crossings, x_centers, angles = buffon_needle_simulation(L, d, N)
-print(f"Estimated π after {N} throws: {pi_estimate:.6f}")
-
-# Visualize a smaller sample for clarity
-plot_buffon_needles(x_centers[:200], angles[:200], crossings[:200], L, d)
-```
-
-![alt text](image-9.png)
-
----
 
 ### 3 Visualization
 
+![alt text](image-14.png)
 
 ```python
+
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Parameters
-L = 1.0     # Needle length
-d = 1.5     # Distance between lines
-N = 200     # Number of needles to visualize (smaller for clarity)
+# Set random seed
+np.random.seed(42)
 
-# Random center positions of needles in [0, d/2] for crossing check,
-# but to visualize well, distribute along x axis beyond one strip
-x_centers = np.random.uniform(0, 5*d, N)
-
-# Random angles in [0, pi/2]
-angles = np.random.uniform(0, np.pi/2, N)
-
-# Calculate crossing condition for each needle
-# For crossing calculation, wrap x_centers into [0, d/2] range
-x_wrapped = x_centers % d
-crossings = x_wrapped <= (L/2)*np.sin(angles)
-
-# Prepare figure
-plt.figure(figsize=(10, 6))
-plt.title("Buffon's Needle Visualization: Crossing vs Non-Crossing Needles")
-
-# Draw parallel lines
-max_x = np.max(x_centers) + d
-for i in range(int(np.ceil(max_x / d)) + 1):
-    plt.axvline(i*d, color='black', linestyle='--', linewidth=1)
-
-# Draw needles: blue if not crossing, red if crossing
-for (x, angle, cross) in zip(x_centers, angles, crossings):
-    x_start = x - (L/2)*np.cos(angle)
-    x_end = x + (L/2)*np.cos(angle)
-    y_pos = 0  # plot all needles horizontally aligned for clarity
-    y_start = y_pos - (L/2)*np.sin(angle)
-    y_end = y_pos + (L/2)*np.sin(angle)
+def estimate_pi_buffon(N, l=1, d=1):
+    # Random midpoint x (y is irrelevant for horizontal lines), and angle theta
+    x_mid = np.random.uniform(0, d, N)  # Midpoint x between 0 and d
+    theta = np.random.uniform(0, np.pi/2, N)  # Angle between 0 and π/2
     
-    color = 'red' if cross else 'blue'
-    plt.plot([x_start, x_end], [y_start, y_end], color=color, linewidth=2)
+    # Distance from midpoint to nearest line
+    crossings = np.abs(l/2 * np.sin(theta)) >= (x_mid % d)
+    M = np.sum(crossings)
+    
+    # Estimate pi
+    pi_estimate = 2 * N / M if M > 0 else np.inf
+    
+    return x_mid, theta, crossings, pi_estimate
 
-plt.xlabel("Horizontal position")
-plt.ylabel("Needle vertical projection")
-plt.ylim(-L, L)
-plt.xlim(0, max_x)
+# Run simulation with N = 1000
+N = 1000
+x_mid, theta, crossings, pi_estimate = estimate_pi_buffon(N)
+
+# Plot
+plt.figure(figsize=(10, 4))
+for i in range(min(N, 50)):  # Plot up to 50 needles
+    x_c = x_mid[i]
+    t = theta[i]
+    x1 = x_c - 0.5 * np.cos(t)
+    x2 = x_c + 0.5 * np.cos(t)
+    y1 = -0.5 * np.sin(t)
+    y2 = 0.5 * np.sin(t)
+    color = 'blue' if crossings[i] else 'red'
+    plt.plot([x1, x2], [y1, y2], color, alpha=0.5)
+    
+# Plot lines
+for x in [0, 1]:
+    plt.axvline(x, color='black', linestyle='--')
+    
+plt.title(f'Buffon’s Needle: π ≈ {pi_estimate:.5f}, N = {N}')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.gca().set_aspect('equal')
 plt.grid(True)
 plt.show()
-```
 
-![alt text](image-10.png)
+print(f"Estimated π: {pi_estimate}")
+```
 
 ## 4. Analysis
 
