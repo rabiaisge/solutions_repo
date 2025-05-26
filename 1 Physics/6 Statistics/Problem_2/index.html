@@ -564,46 +564,53 @@ plot_buffon_needles(x_centers[:200], angles[:200], crossings[:200], L, d)
 <p><img alt="alt text" src="../image-9.png"/></p>
 <hr/>
 <h3 id="3-visualization_1">3 Visualization</h3>
-<p>```python
-import numpy as np
-import matplotlib.pyplot as plt</p>
-<h1 id="parameters">Parameters</h1>
-<p>L = 1.0     # Needle length
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+L = 1.0     # Needle length
 d = 1.5     # Distance between lines
-N = 200     # Number of needles to visualize (smaller for clarity)</p>
-<h1 id="random-center-positions-of-needles-in-0-d2-for-crossing-check">Random center positions of needles in [0, d/2] for crossing check,</h1>
-<h1 id="but-to-visualize-well-distribute-along-x-axis-beyond-one-strip">but to visualize well, distribute along x axis beyond one strip</h1>
-<p>x_centers = np.random.uniform(0, 5*d, N)</p>
-<h1 id="random-angles-in-0-pi2">Random angles in [0, pi/2]</h1>
-<p>angles = np.random.uniform(0, np.pi/2, N)</p>
-<h1 id="calculate-crossing-condition-for-each-needle">Calculate crossing condition for each needle</h1>
-<h1 id="for-crossing-calculation-wrap-x_centers-into-0-d2-range">For crossing calculation, wrap x_centers into [0, d/2] range</h1>
-<p>x_wrapped = x_centers % d
-crossings = x_wrapped &lt;= (L/2)*np.sin(angles)</p>
-<h1 id="prepare-figure">Prepare figure</h1>
-<p>plt.figure(figsize=(10, 6))
-plt.title("Buffon's Needle Visualization: Crossing vs Non-Crossing Needles")</p>
-<h1 id="draw-parallel-lines">Draw parallel lines</h1>
-<p>max_x = np.max(x_centers) + d
+N = 200     # Number of needles to visualize (smaller for clarity)
+
+# Random center positions of needles in [0, d/2] for crossing check,
+# but to visualize well, distribute along x axis beyond one strip
+x_centers = np.random.uniform(0, 5*d, N)
+
+# Random angles in [0, pi/2]
+angles = np.random.uniform(0, np.pi/2, N)
+
+# Calculate crossing condition for each needle
+# For crossing calculation, wrap x_centers into [0, d/2] range
+x_wrapped = x_centers % d
+crossings = x_wrapped &lt;= (L/2)*np.sin(angles)
+
+# Prepare figure
+plt.figure(figsize=(10, 6))
+plt.title("Buffon's Needle Visualization: Crossing vs Non-Crossing Needles")
+
+# Draw parallel lines
+max_x = np.max(x_centers) + d
 for i in range(int(np.ceil(max_x / d)) + 1):
-    plt.axvline(i*d, color='black', linestyle='--', linewidth=1)</p>
-<h1 id="draw-needles-blue-if-not-crossing-red-if-crossing">Draw needles: blue if not crossing, red if crossing</h1>
-<p>for (x, angle, cross) in zip(x_centers, angles, crossings):
-    x_start = x - (L/2)<em>np.cos(angle)
-    x_end = x + (L/2)</em>np.cos(angle)
+    plt.axvline(i*d, color='black', linestyle='--', linewidth=1)
+
+# Draw needles: blue if not crossing, red if crossing
+for (x, angle, cross) in zip(x_centers, angles, crossings):
+    x_start = x - (L/2)*np.cos(angle)
+    x_end = x + (L/2)*np.cos(angle)
     y_pos = 0  # plot all needles horizontally aligned for clarity
-    y_start = y_pos - (L/2)<em>np.sin(angle)
-    y_end = y_pos + (L/2)</em>np.sin(angle)</p>
-<pre><code>color = 'red' if cross else 'blue'
-plt.plot([x_start, x_end], [y_start, y_end], color=color, linewidth=2)
-</code></pre>
-<p>plt.xlabel("Horizontal position")
+    y_start = y_pos - (L/2)*np.sin(angle)
+    y_end = y_pos + (L/2)*np.sin(angle)
+
+    color = 'red' if cross else 'blue'
+    plt.plot([x_start, x_end], [y_start, y_end], color=color, linewidth=2)
+
+plt.xlabel("Horizontal position")
 plt.ylabel("Needle vertical projection")
 plt.ylim(-L, L)
 plt.xlim(0, max_x)
 plt.grid(True)
 plt.show()
- ```</p>
+</code></pre>
 <p><img alt="alt text" src="../image-10.png"/></p>
 <h2 id="4-analysis">4. Analysis</h2>
 <p>We analyze the convergence behavior of the Buffon’s Needle simulation and compare it with the circle-based Monte Carlo method for estimating π.</p>
@@ -630,36 +637,41 @@ plt.show()
 \]</div>
 <hr/>
 <h3 id="python-implementation-for-analysis">🔧 Python Implementation for Analysis</h3>
-<p>```python
-import numpy as np
-import matplotlib.pyplot as plt</p>
-<h1 id="buffons-needle-simulation-function">Buffon's Needle simulation function</h1>
-<p>def buffon_needle_pi_estimate(L, d, N):
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Buffon's Needle simulation function
+def buffon_needle_pi_estimate(L, d, N):
     x_centers = np.random.uniform(0, d/2, N)
     angles = np.random.uniform(0, np.pi/2, N)
     crossings = x_centers &lt;= (L/2)*np.sin(angles)
     C = np.sum(crossings)
     if C == 0:
         return np.nan
-    return (2 * L * N) / (d * C)</p>
-<h1 id="circle-based-monte-carlo-estimation">Circle-based Monte Carlo π estimation</h1>
-<p>def monte_carlo_circle_pi(N):
+    return (2 * L * N) / (d * C)
+
+# Circle-based Monte Carlo π estimation
+def monte_carlo_circle_pi(N):
     points = np.random.uniform(-1, 1, (N, 2))
-    inside_circle = np.sum(points[:,0]<strong>2 + points[:,1]</strong>2 &lt;= 1)
-    return 4 * inside_circle / N</p>
-<h1 id="parameters_1">Parameters</h1>
-<p>L = 1.0
+    inside_circle = np.sum(points[:,0]**2 + points[:,1]**2 &lt;= 1)
+    return 4 * inside_circle / N
+
+# Parameters
+L = 1.0
 d = 1.5
-sample_sizes = np.logspace(2, 5, num=20, dtype=int)  # From 100 to 100,000 throws</p>
-<p>needle_estimates = []
-circle_estimates = []</p>
-<p>for N in sample_sizes:
+sample_sizes = np.logspace(2, 5, num=20, dtype=int)  # From 100 to 100,000 throws
+
+needle_estimates = []
+circle_estimates = []
+
+for N in sample_sizes:
     pi_needle = buffon_needle_pi_estimate(L, d, N)
     pi_circle = monte_carlo_circle_pi(N)
     needle_estimates.append(pi_needle)
-    circle_estimates.append(pi_circle)</p>
-<h1 id="plotting-convergence">Plotting convergence</h1>
-<p>plt.figure(figsize=(10,6))
+    circle_estimates.append(pi_circle)
+
+# Plotting convergence
+plt.figure(figsize=(10,6))
 plt.plot(sample_sizes, needle_estimates, 'o-', label="Buffon's Needle")
 plt.plot(sample_sizes, circle_estimates, 's-', label="Circle Monte Carlo")
 plt.axhline(np.pi, color='k', linestyle='--', label="True π")
@@ -669,9 +681,10 @@ plt.ylabel("Estimated π")
 plt.title("Convergence of π Estimation Methods")
 plt.legend()
 plt.grid(True)
-plt.show()</p>
-<h1 id="plot-absolute-errors">Plot absolute errors</h1>
-<p>plt.figure(figsize=(10,6))
+plt.show()
+
+# Plot absolute errors
+plt.figure(figsize=(10,6))
 plt.plot(sample_sizes, np.abs(np.pi - np.array(needle_estimates)), 'o-', label="Buffon's Needle Error")
 plt.plot(sample_sizes, np.abs(np.pi - np.array(circle_estimates)), 's-', label="Circle Monte Carlo Error")
 plt.xscale('log')
@@ -682,7 +695,7 @@ plt.title("Error Convergence of π Estimation Methods")
 plt.legend()
 plt.grid(True, which="both")
 plt.show()
- ```</p>
+</code></pre>
 <p><img alt="alt text" src="../image-11.png"/>
 <img alt="alt text" src="../image-12.png"/></p>
 <p>Observations
