@@ -249,7 +249,7 @@ plt.grid(True, which='both')
 plt.legend()
 plt.tight_layout()
 plt.show()
- ```
+```
 
 
 # ✅ PART 2: Estimating π Using Buffon’s Needle
