@@ -447,6 +447,7 @@ plot_buffon_needles(x_centers[:200], angles[:200], crossings[:200], L, d)
 
 ### 3 Visualization
 
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -494,7 +495,7 @@ plt.ylim(-L, L)
 plt.xlim(0, max_x)
 plt.grid(True)
 plt.show()
- ```
+```
 
 ![alt text](image-10.png)
 
@@ -589,7 +590,7 @@ plt.title("Error Convergence of π Estimation Methods")
 plt.legend()
 plt.grid(True, which="both")
 plt.show()
- ```
+```
  
 ![alt text](image-11.png)
 ![alt text](image-12.png)
